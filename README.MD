@@ -1,6 +1,5 @@
 # Bartender
 ### This is a Windows application to help bartenders organising orders and invoices.
-##### Data is mainly stored in Redis. 
 ##### This application will also have a mobile implementation that will have a real-time connection with the UI and vice versa.
 
 ## Technologies used:
