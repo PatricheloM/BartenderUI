@@ -6,16 +6,11 @@ namespace BartenderUI.Util
     {
         public static int ScreenWidth()
         {
-
-            int width = Screen.PrimaryScreen.Bounds.Width;
-            return width;
-
+            return Screen.PrimaryScreen.Bounds.Width;
         }
         public static int ScreenHeight()
         {
-
-            int height = Screen.PrimaryScreen.Bounds.Height;
-            return height;
+            return Screen.PrimaryScreen.Bounds.Height;
         }
     }
 }
