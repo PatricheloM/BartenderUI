@@ -37,9 +37,9 @@ namespace BartenderUI.Redis
             return db.HashGetAll(key);
         }
 
-        public static void HDel(string key, string value)
+        public static bool HDel(string key, string value)
         {
-            db.HashDelete(key, value);
+            return db.HashDelete(key, value);
         }
 
         public static void SAdd(string key, string value)
@@ -62,9 +62,9 @@ namespace BartenderUI.Redis
             return Convert.ToInt32(db.StringIncrement(key));
         }
 
-        public static void Del(string key)
+        public static bool Del(string key)
         {
-            db.KeyDelete(key);
+            return db.KeyDelete(key);
         }
     }
 }

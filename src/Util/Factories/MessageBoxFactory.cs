@@ -29,6 +29,9 @@ namespace BartenderUI.Util.Factories
         private readonly static string COLUMN_COUNT_ERROR_TEXT = "A fájl nem tartalmaz két oszlopt! (Név, Ár)";
         private readonly static string COLUMN_COUNT_ERROR_TITLE = "Hibás fájl";
 
+        private readonly static string ITEM_NOT_FOUND_ERROR_TEXT = "A termék nem található!";
+        private readonly static string ITEM_NOT_FOUND_ERROR_TITLE = "Nem található termék";
+
         private static string ADDED_ITEMS_WITH_ERRORS_TEXT(int arg1, int arg2) { return String.Format("{0} hozzáadva, {1} hiba.\nEllenőrizze, hogy az A oszlopban csak a termék neve van, illetve a B oszlopban csak az ára számokkal leírva vagy esetleg ugyan az a termék szerepel-e kétszer.", arg1, arg2); }
         private static string ADDED_ITEMS_WITHOUT_ERRORS_TEXT(int arg) { return String.Format("{0} hozzáadva.", arg); }
         private readonly static string ADDED_ITEMS_TITLE = "Termék hozzáadás";
@@ -148,6 +151,16 @@ namespace BartenderUI.Util.Factories
         public static string GetNewOrderTitle()
         {
             return NEW_ORDER_TITLE;
+        }
+
+        public static string GetItemNotFoundText()
+        {
+            return ITEM_NOT_FOUND_ERROR_TEXT;
+        }
+
+        public static string GetItemNotFoundTitle()
+        {
+            return ITEM_NOT_FOUND_ERROR_TITLE;
         }
     }
 }
