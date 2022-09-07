@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace BartenderUI.Util.Builders
+﻿namespace BartenderUI.Util.Builders
 {
     interface IBuilder<T>
     {
