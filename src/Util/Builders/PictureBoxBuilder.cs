@@ -6,13 +6,19 @@ using BartenderUI.Util.Structs;
 
 namespace BartenderUI.Util.Builders
 {
-    class PictureBoxBuilder : PictureBox
+    class PictureBoxBuilder : PictureBox, IBuilder<PictureBoxBuilder>
     {
         public int Id { get; set; }
         public SzabadFoglaltEnum State { get; set; }
 
         public PictureBoxBuilder GetInstance()
         {
+            return this;
+        }
+
+        public PictureBoxBuilder WithName(string value)
+        {
+            Name = value;
             return this;
         }
 

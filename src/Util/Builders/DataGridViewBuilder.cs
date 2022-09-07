@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 namespace BartenderUI.Util.Builders
 {
-    class DataGridViewBuilder : DataGridView
+    class DataGridViewBuilder : DataGridView, IBuilder<DataGridViewBuilder>
     {
         public DataGridViewBuilder()
         {

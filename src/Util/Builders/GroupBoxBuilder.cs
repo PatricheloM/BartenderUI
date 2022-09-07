@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace BartenderUI.Util.Builders
 {
-    class GroupBoxBuilder : GroupBox
+    class GroupBoxBuilder : GroupBox, IBuilder<GroupBoxBuilder>
     {
         public GroupBoxBuilder()
         {

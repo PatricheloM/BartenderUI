@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace BartenderUI.Util.Builders
 {
-    class ButtonBuilder : Button
+    class ButtonBuilder : Button, IBuilder<ButtonBuilder>
     {
         public ButtonBuilder()
         {

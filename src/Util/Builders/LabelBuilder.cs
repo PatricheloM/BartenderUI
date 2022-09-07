@@ -5,7 +5,7 @@ using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Util.Builders
 {
-    class LabelBuilder : Label
+    class LabelBuilder : Label, IBuilder<LabelBuilder>
     {
         public LabelBuilder()
         {

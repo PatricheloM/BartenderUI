@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace BartenderUI.Util.Builders
 {
-    class TextBoxBuilder : TextBox
+    class TextBoxBuilder : TextBox, IBuilder<TextBoxBuilder>
     {
         public TextBoxBuilder()
         {
