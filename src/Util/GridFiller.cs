@@ -30,7 +30,7 @@ namespace BartenderUI.Util
                     grid.Rows.Add(
                         item.Name, 
                         item.Value,
-                        PriceCalculator.CalculateByQuantity(item.Name, Convert.ToInt32(item.Value)), 
+                        PriceCalculator.Visualizer(item.Name, Convert.ToInt32(item.Value)), 
                         szamla);
                 }
             }
