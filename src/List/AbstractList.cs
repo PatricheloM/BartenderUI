@@ -16,7 +16,6 @@ namespace BartenderUI.List
         private ButtonBuilder addItem;
         private ButtonBuilder removeItem;
 
-        protected abstract void ListClosingEvent(object sender, FormClosingEventArgs e);
         protected abstract void AddItemButtonClickEvent(object sender, EventArgs e);
         protected abstract void RemoveItemButtonClickEvent(object sender, EventArgs e);
 

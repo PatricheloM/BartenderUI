@@ -31,10 +31,5 @@ namespace BartenderUI.List
         {
             throw new NotImplementedException();
         }
-
-        protected override void ListClosingEvent(object sender, FormClosingEventArgs e)
-        {
-            RefreshEvent.Invoke();
-        }
     }
 }
