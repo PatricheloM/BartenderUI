@@ -51,14 +51,6 @@ namespace BartenderUI.List
             }
         }
 
-        protected override void PriceBoxKeyPressEvent(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         protected override void UndoButtonClickEvent(object sender, EventArgs e)
         {
             Close();

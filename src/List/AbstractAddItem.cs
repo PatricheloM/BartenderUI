@@ -23,7 +23,6 @@ namespace BartenderUI.List
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
         protected abstract void BoxKeyUpEvent(object sender, KeyEventArgs e);
-        protected abstract void PriceBoxKeyPressEvent(object sender, KeyPressEventArgs e);
 
         protected void InitializeComponents()
         {
