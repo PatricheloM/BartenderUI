@@ -18,7 +18,7 @@ namespace BartenderUI.Menu
 
         protected abstract void RemoveButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
-        protected abstract void BoxKeyUpEvent(object sender, KeyEventArgs e);
+        protected abstract void BoxKeyDownEvent(object sender, KeyEventArgs e);
 
         protected void InitializeComponents()
         {
@@ -48,7 +48,7 @@ namespace BartenderUI.Menu
                 .WithLocation(12, 25)
                 .WithSize(198, 20)
                 .WithName("nameBox")
-                .AddKeyUpEvent(BoxKeyUpEvent)
+                .AddKeyDownEvent(BoxKeyDownEvent)
                 .WithAutoCompleteSource(names.ToArray());
 
             infoLabel = new LabelBuilder()

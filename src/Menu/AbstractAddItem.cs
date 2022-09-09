@@ -17,7 +17,7 @@ namespace BartenderUI.Menu
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
-        protected abstract void BoxKeyUpEvent(object sender, KeyEventArgs e);
+        protected abstract void BoxKeyDownEvent(object sender, KeyEventArgs e);
         protected abstract void PriceBoxKeyPressEvent(object sender, KeyPressEventArgs e);
 
         protected void InitializeComponents()
@@ -57,7 +57,7 @@ namespace BartenderUI.Menu
                 .WithLocation(83, 45)
                 .WithSize(128, 20)
                 .WithName("priceBox")
-                .AddKeyUpEvent(BoxKeyUpEvent)
+                .AddKeyDownEvent(BoxKeyDownEvent)
                 .AddKeyPressEvent(PriceBoxKeyPressEvent);
 
             GetInstance()

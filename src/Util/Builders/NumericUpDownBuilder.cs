@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace BartenderUI.Util.Builders
 {
@@ -25,6 +26,12 @@ namespace BartenderUI.Util.Builders
         public NumericUpDownBuilder WithSize(int value1, int value2)
         {
             Size = new Size(value1, value2);
+            return this;
+        }
+
+        public NumericUpDownBuilder WithValue(int value)
+        {
+            Value = value;
             return this;
         }
     }

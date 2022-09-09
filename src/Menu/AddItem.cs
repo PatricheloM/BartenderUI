@@ -97,7 +97,7 @@ namespace BartenderUI.Menu
             }
         }
 
-        protected override void BoxKeyUpEvent(object sender, KeyEventArgs e)
+        protected override void BoxKeyDownEvent(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 13) // enter
             {

@@ -56,9 +56,9 @@ namespace BartenderUI.Util.Builders
             return this;
         }
 
-        public TextBoxBuilder AddKeyUpEvent(KeyEventHandler value)
+        public TextBoxBuilder AddKeyDownEvent(KeyEventHandler value)
         {
-            KeyUp += value;
+            KeyDown += value;
             return this;
         }
 

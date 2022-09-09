@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BartenderUI.Redis;
-using BartenderUI.Util;
 using BartenderUI.Util.Factories;
-using StackExchange.Redis;
 
 namespace BartenderUI.List
 {
@@ -13,7 +11,7 @@ namespace BartenderUI.List
 
         public AddItem(int id)
         {
-            InitializeComponents();
+            InitializeComponents(id);
             this.id = id;
         }
 
@@ -27,7 +25,7 @@ namespace BartenderUI.List
         {
             try
             {
-                if (nameBox.Text == null || nameBox.Text == "" || string.IsNullOrWhiteSpace(nameBox.Text) || invoiceBox.Text == null || invoiceBox.Text == "" || string.IsNullOrWhiteSpace(invoiceBox.Text) || Convert.ToInt32(quantityBox.Text) == 0)
+                if (nameBox.Text == null || nameBox.Text == "" || string.IsNullOrWhiteSpace(nameBox.Text) || invoiceBox.Text == null || invoiceBox.Text == "" || string.IsNullOrWhiteSpace(invoiceBox.Text) || Convert.ToInt32(quantityBox.Value) == 0)
                 {
                     MessageBoxFactory.Produce(MessageBoxFactory.GetEmptyInputText(), MessageBoxFactory.GetEmptyInputTitle(), MessageBoxButtons.OK);
                 }
@@ -43,7 +41,7 @@ namespace BartenderUI.List
             }
         }
 
-        protected override void BoxKeyUpEvent(object sender, KeyEventArgs e)
+        protected override void BoxKeyDownEvent(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 13) // enter
             {

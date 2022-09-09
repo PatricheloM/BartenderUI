@@ -22,9 +22,9 @@ namespace BartenderUI.List
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
-        protected abstract void BoxKeyUpEvent(object sender, KeyEventArgs e);
+        protected abstract void BoxKeyDownEvent(object sender, KeyEventArgs e);
 
-        protected void InitializeComponents()
+        protected void InitializeComponents(int id)
         {
             HashEntry[] menu = RedisRepository.HGetAll("menu");
             List<string> names = new List<string>();
@@ -75,13 +75,15 @@ namespace BartenderUI.List
             quantityBox = new NumericUpDownBuilder()
                 .WithLocation(83, 45)
                 .WithSize(128, 20)
-                .WithName("quantityBox");
+                .WithName("quantityBox")
+                .WithValue(1);
 
             invoiceBox = new TextBoxBuilder()
                 .WithLocation(83, 80)
                 .WithSize(128, 20)
                 .WithName("invoiceBox")
-                .AddKeyUpEvent(BoxKeyUpEvent);
+                .AddKeyDownEvent(BoxKeyDownEvent)
+                .WithAutoCompleteSource(RedisRepository.SMembers("szamlak_" + id));
 
             GetInstance()
                 .WithClientSize(223, 156)
