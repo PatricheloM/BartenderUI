@@ -57,6 +57,11 @@ namespace BartenderUI.Redis
             db.SetRemove(key, value);
         }
 
+        public static bool SIsMember(string key, string value)
+        {
+            return Array.IndexOf(SMembers(key), value) != -1;
+        }
+
         public static int Incr(string key)
         {
             return Convert.ToInt32(db.StringIncrement(key));
@@ -65,6 +70,11 @@ namespace BartenderUI.Redis
         public static bool Del(string key)
         {
             return db.KeyDelete(key);
+        }
+
+        public static bool Exists(string key)
+        {
+            return db.KeyExists(key);
         }
     }
 }

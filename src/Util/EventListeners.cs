@@ -21,7 +21,7 @@ namespace BartenderUI.Util
                 layout.Invoke(new MethodInvoker(delegate
                 {
                     belso.Controls.Clear();
-                    belso.Controls.Clear();
+                    kulso.Controls.Clear();
                     LayoutFiller.FillLayout(belso, kulso);
 
                     newOrderIndicator.WithHiddenValue(false);
@@ -40,7 +40,7 @@ namespace BartenderUI.Util
                 layout.Invoke(new MethodInvoker(delegate
                 {
                     belso.Controls.Clear();
-                    belso.Controls.Clear();
+                    kulso.Controls.Clear();
                     LayoutFiller.FillLayout(belso, kulso);
                 }));
             });

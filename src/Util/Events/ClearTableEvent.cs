@@ -10,7 +10,7 @@ namespace BartenderUI.Util.Events
         {
             MenuItem menuItem = sender as MenuItem;
             PictureBoxBuilder table = menuItem.GetContextMenu().SourceControl as PictureBoxBuilder;
-            InvoiceDeleteHelper.DeleteInvoices(table.Id.ToString());
+            InvoiceDeleteHelper.DeleteInvoices(table.Id);
         }
     }
 }
