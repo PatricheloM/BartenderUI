@@ -61,7 +61,13 @@
     <Compile Include="Layout\AbstractLayout.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="List\AbstractAddItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="List\AbstractList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="List\AddItem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="List\List.cs">
@@ -106,6 +112,9 @@
     </Compile>
     <Compile Include="Util\Builders\IBuilder.cs" />
     <Compile Include="Util\Builders\LabelBuilder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Util\Builders\NumericUpDownBuilder.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Util\Builders\PictureBoxBuilder.cs">

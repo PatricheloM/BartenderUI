@@ -1,5 +1,6 @@
 ﻿using System;
 using BartenderUI.Util.Builders;
+
 namespace BartenderUI.Util.Events
 {
     class DoubleClickEvent

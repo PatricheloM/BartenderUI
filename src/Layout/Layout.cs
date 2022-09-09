@@ -46,7 +46,8 @@ namespace BartenderUI.Layout
 
         protected override void KifizetesButtonClickEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            // todo
+            RefreshEvent.Invoke();
         }
 
         protected override void ResetButtonClickEvent(object sender, EventArgs e)

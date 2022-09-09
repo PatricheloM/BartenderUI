@@ -11,7 +11,7 @@ namespace BartenderUI.Util.Factories
         private readonly static string EXIT_TEXT = "Biztos be akarod zárni az ablakot?";
         private readonly static string EXIT_TITLE = "Bezárás";
 
-        private readonly static string ONLY_INT_TEXT = "Az 'Ár' mező csak számokat fogad el!";
+        private readonly static string ONLY_INT_TEXT = "A mező csak számokat fogad el!";
         private readonly static string ONLY_INT_TITLE = "Csak szám";
 
         private readonly static string EMPTY_INPUT_TEXT = "Üresen hagyott mező!";

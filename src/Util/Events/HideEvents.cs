@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util;
-using BartenderUI.Redis;
 using BartenderUI.Util.Builders;
 using BartenderUI.Util.Factories;
 

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using BartenderUI.Redis;
 using BartenderUI.Util.Builders;
+using StackExchange.Redis;
 
-namespace BartenderUI.Menu
+namespace BartenderUI.List
 {
     abstract class AbstractAddItem : FormBuilder
     {
@@ -10,10 +13,12 @@ namespace BartenderUI.Menu
         private ButtonBuilder undoButton;
 
         private LabelBuilder nameLabel;
-        private LabelBuilder priceLabel;
+        private LabelBuilder quantityLabel;
+        private LabelBuilder invoiceLabel;
 
         protected TextBoxBuilder nameBox;
-        protected TextBoxBuilder priceBox;
+        protected NumericUpDownBuilder quantityBox;
+        protected TextBoxBuilder invoiceBox;
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
@@ -22,15 +27,23 @@ namespace BartenderUI.Menu
 
         protected void InitializeComponents()
         {
+            HashEntry[] menu = RedisRepository.HGetAll("menu");
+            List<string> names = new List<string>();
+
+            foreach (HashEntry item in menu)
+            {
+                names.Add(item.Name);
+            }
+
             addButton = new ButtonBuilder()
-                .WithLocation(12, 83)
+                .WithLocation(12, 118)
                 .WithSize(118, 23)
                 .WithName("addButton")
                 .WithText("Oké")
                 .AddClickEvent(AddButtonClickEvent);
 
             undoButton = new ButtonBuilder()
-                .WithLocation(136, 83)
+                .WithLocation(136, 118)
                 .WithSize(75, 23)
                 .WithName("undoButton")
                 .WithText("Mégsem")
@@ -42,30 +55,41 @@ namespace BartenderUI.Menu
                 .WithName("nameLabel")
                 .WithText("Termék név");
 
-            priceLabel = new LabelBuilder()
+            quantityLabel = new LabelBuilder()
                 .WithLocation(13, 48)
                 .WithSize(35, 13)
-                .WithName("priceLabel")
-                .WithText("Ár (Ft)");
+                .WithName("quantityLabel")
+                .WithText("Darabszám");
+
+            invoiceLabel = new LabelBuilder()
+                .WithLocation(13, 83)
+                .WithSize(35, 13)
+                .WithName("invoiceLabel")
+                .WithText("Számla");
 
             nameBox = new TextBoxBuilder()
                 .WithLocation(83, 10)
                 .WithSize(128, 20)
-                .WithName("nameBox");
+                .WithName("nameBox")
+                .WithAutoCompleteSource(names.ToArray());
 
-            priceBox = new TextBoxBuilder()
+            quantityBox = new NumericUpDownBuilder()
                 .WithLocation(83, 45)
                 .WithSize(128, 20)
-                .WithName("priceBox")
-                .AddKeyUpEvent(BoxKeyUpEvent)
-                .AddKeyPressEvent(PriceBoxKeyPressEvent);
+                .WithName("quantityBox");
+
+            invoiceBox = new TextBoxBuilder()
+                .WithLocation(83, 80)
+                .WithSize(128, 20)
+                .WithName("invoiceBox")
+                .AddKeyUpEvent(BoxKeyUpEvent);
 
             GetInstance()
-                .WithClientSize(223, 118)
+                .WithClientSize(223, 156)
                 .WithName("AddItem")
                 .WithText("Tétel hozzáadás")
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
-                .AddAll(addButton, undoButton, nameLabel, priceLabel, nameBox, priceBox);
+                .AddAll(addButton, undoButton, nameLabel, quantityLabel, invoiceLabel, nameBox, quantityBox, invoiceBox);
         }
     }
 }

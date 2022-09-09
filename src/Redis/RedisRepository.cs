@@ -32,6 +32,11 @@ namespace BartenderUI.Redis
             db.HashSet(key, values);
         }
 
+        public static void HIncrBy(string key, string value, int amount)
+        {
+            db.HashIncrement(key, value, amount);
+        }
+
         public static HashEntry[] HGetAll(string key)
         {
             return db.HashGetAll(key);

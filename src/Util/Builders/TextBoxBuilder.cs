@@ -40,6 +40,12 @@ namespace BartenderUI.Util.Builders
             return this;
         }
 
+        public TextBoxBuilder WithText(string value)
+        {
+            Text = value;
+            return this;
+        }
+
         public TextBoxBuilder WithAutoCompleteSource(string[] values)
         {
             AutoCompleteStringCollection source = new AutoCompleteStringCollection();
@@ -53,6 +59,12 @@ namespace BartenderUI.Util.Builders
         public TextBoxBuilder AddKeyUpEvent(KeyEventHandler value)
         {
             KeyUp += value;
+            return this;
+        }
+
+        public TextBoxBuilder AddKeyPressEvent(KeyPressEventHandler value)
+        {
+            KeyPress += value;
             return this;
         }
     }
