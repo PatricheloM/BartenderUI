@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
+using System;
 
 namespace BartenderUI.Util.Builders
 {
@@ -52,6 +53,12 @@ namespace BartenderUI.Util.Builders
             return this;
         }
 
+        public ComboBoxBuilder AddSelectedIndexChangedEvent(EventHandler value)
+        {
+            SelectedIndexChanged += value;
+            return this;
+        }
+
         public ComboBoxBuilder WithAutoCompleteSource(string[] values)
         {
             AutoCompleteStringCollection source = new AutoCompleteStringCollection();
@@ -78,6 +85,18 @@ namespace BartenderUI.Util.Builders
         public ComboBoxBuilder WithDefaultValue(string value)
         {
             Text = value;
+            return this;
+        }
+
+        public ComboBoxBuilder WithDropDownStyle(ComboBoxStyle value)
+        {
+            DropDownStyle = value;
+            return this;
+        }
+
+        public ComboBoxBuilder WithFormattingValue(bool value)
+        {
+            FormattingEnabled = value;
             return this;
         }
     }

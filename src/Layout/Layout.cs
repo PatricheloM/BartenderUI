@@ -46,7 +46,8 @@ namespace BartenderUI.Layout
 
         protected override void KifizetesButtonClickEvent(object sender, EventArgs e)
         {
-            // todo
+            Payment.Payment payment = new Payment.Payment();
+            payment.ShowDialog();
             RefreshEvent.Invoke();
         }
 

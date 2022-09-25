@@ -98,6 +98,12 @@
     <Compile Include="Menu\RemoveItem.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Payment\AbstractPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payment\Payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Redis\RedisConnection.cs" />
     <Compile Include="Redis\RedisRepository.cs" />
     <Compile Include="Util\Builders\ButtonBuilder.cs">
@@ -124,6 +130,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Util\Builders\NumericUpDownBuilder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Util\Builders\PanelBuilder.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Util\Builders\PictureBoxBuilder.cs">

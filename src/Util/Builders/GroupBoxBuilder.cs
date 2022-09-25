@@ -56,5 +56,11 @@ namespace BartenderUI.Util.Builders
             TabStop = value;
             return this;
         }
+
+        public GroupBoxBuilder WithText(string value)
+        {
+            Text = value;
+            return this;
+        }
     }
 }
