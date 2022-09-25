@@ -22,10 +22,13 @@ namespace BartenderUI.Menu
                 }
                 else
                 {
-                    Close();
                     if (!RedisRepository.HDel("menu", nameBox.Text))
                     {
                         MessageBoxFactory.Produce(MessageBoxFactory.GetItemNotFoundText(), MessageBoxFactory.GetItemNotFoundTitle(), MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        Close();
                     }
                 }
             }

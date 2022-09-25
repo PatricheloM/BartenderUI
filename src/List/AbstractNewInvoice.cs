@@ -1,41 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using BartenderUI.Util.Builders;
-using BartenderUI.Redis;
-using StackExchange.Redis;
 
-namespace BartenderUI.Menu
+namespace BartenderUI.List
 {
-    abstract class AbstractRemoveItem : FormBuilder
+    abstract class AbstractNewInvoice : FormBuilder
     {
-        private ButtonBuilder removeButton;
+        private ButtonBuilder addButton;
         private ButtonBuilder undoButton;
 
         private LabelBuilder infoLabel;
 
-        protected ComboBoxBuilder nameBox;
+        protected TextBoxBuilder invoiceBox;
 
-        protected abstract void RemoveButtonClickEvent(object sender, EventArgs e);
+        protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
         protected abstract void BoxKeyDownEvent(object sender, KeyEventArgs e);
 
         protected void InitializeComponents()
         {
-            HashEntry[] menu = RedisRepository.HGetAll("menu");
-            List<string> names = new List<string>();
 
-            foreach (HashEntry item in menu)
-            {
-                names.Add(item.Name);
-            }
-
-            removeButton = new ButtonBuilder()
+            addButton = new ButtonBuilder()
                 .WithLocation(12, 58)
                 .WithSize(118, 23)
                 .WithName("addButton")
                 .WithText("Oké")
-                .AddClickEvent(RemoveButtonClickEvent);
+                .AddClickEvent(AddButtonClickEvent);
 
             undoButton = new ButtonBuilder()
                 .WithLocation(136, 58)
@@ -44,26 +34,24 @@ namespace BartenderUI.Menu
                 .WithText("Mégsem")
                 .AddClickEvent(UndoButtonClickEvent);
 
-            nameBox = new ComboBoxBuilder()
+            invoiceBox = new TextBoxBuilder()
                 .WithLocation(12, 25)
                 .WithSize(198, 20)
-                .WithName("nameBox")
-                .AddKeyDownEvent(BoxKeyDownEvent)
-                .WithAutoCompleteSource(names.ToArray())
-                .AddAll(names.ToArray());
+                .WithName("invoiceBox")
+                .AddKeyDownEvent(BoxKeyDownEvent);
 
             infoLabel = new LabelBuilder()
                 .WithLocation(12, 5)
                 .WithSize(64, 13)
                 .WithName("infoLabel")
-                .WithText("Kezdje el gépelni!");
+                .WithText("Számla:");
 
             GetInstance()
                 .WithClientSize(223, 88)
-                .WithName("RemoveItem")
-                .WithText("Tétel eltávolítás")
+                .WithName("NewInvoice")
+                .WithText("Új számla")
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
-                .AddAll(removeButton, undoButton, infoLabel, nameBox);
+                .AddAll(addButton, undoButton, infoLabel, invoiceBox);
         }
     }
 }

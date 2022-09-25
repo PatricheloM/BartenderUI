@@ -67,10 +67,16 @@
     <Compile Include="List\AbstractList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="List\AbstractNewInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="List\AddItem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="List\List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="List\NewInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainClass.cs" />
@@ -104,6 +110,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Util\Builders\DataGridViewTextBoxColumnBuilder.cs" />
+    <Compile Include="Util\Builders\ComboBoxBuilder.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Util\Builders\FormBuilder.cs">
       <SubType>Form</SubType>
     </Compile>

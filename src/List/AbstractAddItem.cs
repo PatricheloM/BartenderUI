@@ -16,13 +16,12 @@ namespace BartenderUI.List
         private LabelBuilder quantityLabel;
         private LabelBuilder invoiceLabel;
 
-        protected TextBoxBuilder nameBox;
+        protected ComboBoxBuilder nameBox;
         protected NumericUpDownBuilder quantityBox;
-        protected TextBoxBuilder invoiceBox;
+        protected ComboBoxBuilder invoiceBox;
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
-        protected abstract void BoxKeyDownEvent(object sender, KeyEventArgs e);
 
         protected void InitializeComponents(int id)
         {
@@ -66,10 +65,11 @@ namespace BartenderUI.List
                 .WithName("invoiceLabel")
                 .WithText("Számla");
 
-            nameBox = new TextBoxBuilder()
+            nameBox = new ComboBoxBuilder()
                 .WithLocation(83, 10)
                 .WithSize(128, 20)
                 .WithName("nameBox")
+                .AddAll(names.ToArray())
                 .WithAutoCompleteSource(names.ToArray());
 
             quantityBox = new NumericUpDownBuilder()
@@ -78,12 +78,14 @@ namespace BartenderUI.List
                 .WithName("quantityBox")
                 .WithValue(1);
 
-            invoiceBox = new TextBoxBuilder()
+            invoiceBox = new ComboBoxBuilder()
                 .WithLocation(83, 80)
                 .WithSize(128, 20)
                 .WithName("invoiceBox")
-                .AddKeyDownEvent(BoxKeyDownEvent)
-                .WithAutoCompleteSource(RedisRepository.SMembers("szamlak_" + id));
+                .WithReadOnlyValue(true)
+                .AddAll(RedisRepository.SMembers("szamlak_" + id))
+                .AddAll(new string[] { "<Új számla>"})
+                .WithDefaultValue("<Új számla>");
 
             GetInstance()
                 .WithClientSize(223, 156)
