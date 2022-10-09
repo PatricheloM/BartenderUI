@@ -48,7 +48,6 @@ namespace BartenderUI.Layout
         {
             Payment.Payment payment = new Payment.Payment();
             payment.ShowDialog();
-            RefreshEvent.Invoke();
         }
 
         protected override void ResetButtonClickEvent(object sender, EventArgs e)

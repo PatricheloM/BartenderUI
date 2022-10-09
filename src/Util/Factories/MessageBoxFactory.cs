@@ -38,6 +38,9 @@ namespace BartenderUI.Util.Factories
 
         private readonly static string NEW_ORDER_TITLE = "Új rendelés!";
 
+        private readonly static string PAID_WARNING_TEXT = "Biztos ki lett fizetve a számla?";
+        private readonly static string PAID_WARNING_TITLE = "Kifizetés";
+
         public static DialogResult Produce(string text, string title, MessageBoxButtons buttons) 
         {
             return MessageBox.Show(text, title, buttons);
@@ -161,6 +164,16 @@ namespace BartenderUI.Util.Factories
         public static string GetItemNotFoundTitle()
         {
             return ITEM_NOT_FOUND_ERROR_TITLE;
+        }
+
+        public static string GetPaidWarningText()
+        {
+            return PAID_WARNING_TEXT;
+        }
+
+        public static string GetPaidWarningTitle()
+        {
+            return PAID_WARNING_TITLE;
         }
     }
 }

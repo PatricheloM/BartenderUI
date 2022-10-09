@@ -46,5 +46,14 @@ namespace BartenderUI.Util.Builders
             AutoScroll = true;
             return this;
         }
+
+        public PanelBuilder AddAll(params Control[] values)
+        {
+            foreach (Control value in values)
+            {
+                Controls.Add(value);
+            }
+            return this;
+        }
     }
 }

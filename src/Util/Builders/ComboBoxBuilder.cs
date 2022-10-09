@@ -99,5 +99,11 @@ namespace BartenderUI.Util.Builders
             FormattingEnabled = value;
             return this;
         }
+
+        public ComboBoxBuilder Clear()
+        {
+            Items.Clear();
+            return this;
+        }
     }
 }

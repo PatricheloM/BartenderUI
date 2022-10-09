@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Drawing;
 using BartenderUI.Util.Builders;
-using System.Net.Mail;
 
 namespace BartenderUI.Payment
 {
@@ -12,9 +11,9 @@ namespace BartenderUI.Payment
 
         protected ComboBoxBuilder invoices;
 
-        private ButtonBuilder payButton;
+        protected ButtonBuilder payButton;
 
-        private PanelBuilder panel;
+        protected PanelBuilder panel;
 
         private GroupBoxBuilder groupBox;
 
@@ -49,7 +48,7 @@ namespace BartenderUI.Payment
                 .WithLocation(15, 432)
                 .WithName("payButton")
                 .WithSize(453, 36)
-                .WithText("Kifizetve: 0 Ft")
+                .WithText("Válasszon számlát!")
                 .AddClickEvent(PayButtonClickEvent);
 
             invoices = new ComboBoxBuilder()
