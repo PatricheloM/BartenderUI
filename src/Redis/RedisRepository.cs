@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StackExchange.Redis;
 
 namespace BartenderUI.Redis
@@ -6,6 +7,7 @@ namespace BartenderUI.Redis
     class RedisRepository
     {
         private static readonly IDatabase db = RedisConnection.GetConnection();
+        private static readonly IServer server = RedisConnection.GetServer();
 
         public static void Publish(string channel, string message)
         {
@@ -80,6 +82,11 @@ namespace BartenderUI.Redis
         public static bool Exists(string key)
         {
             return db.KeyExists(key);
+        }
+
+        public static IEnumerable<RedisKey> Keys(string pattern)
+        {
+            return server.Keys(pattern: pattern);
         }
     }
 }

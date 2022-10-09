@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using StackExchange.Redis;
+using BartenderUI.Redis;
 
 namespace BartenderUI.Payment
 {
@@ -17,7 +19,10 @@ namespace BartenderUI.Payment
 
         protected override void PayButtonClickEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (RedisKey key in RedisRepository.Keys("szamlak_*"))
+            {
+                Console.WriteLine(key);
+            }
         }
     }
 }
