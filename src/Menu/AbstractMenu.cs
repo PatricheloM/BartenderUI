@@ -63,7 +63,7 @@ namespace BartenderUI.Menu
                 .WithClientSize(600, 835)
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
                 .WithName("Menu")
-                .WithText("Itallap")
+                .WithText("Menü")
                 .WithShowIconValue(false)
                 .WithShowInTaskbarValue(false)
                 .AddAll(dataGridView, addItem, addItemFromFile, removeItem);

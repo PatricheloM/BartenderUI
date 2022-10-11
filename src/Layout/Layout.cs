@@ -38,7 +38,7 @@ namespace BartenderUI.Layout
                 .WithState(FormWindowState.Minimized);
         }
 
-        protected override void ItallapButtonClickEvent(object sender, EventArgs e)
+        protected override void MenuButtonClickEvent(object sender, EventArgs e)
         {
             Menu.Menu menu = new Menu.Menu();
             menu.ShowDialog();
