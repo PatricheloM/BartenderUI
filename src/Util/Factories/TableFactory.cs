@@ -2,6 +2,8 @@
 using BartenderUI.Util.Events;
 using BartenderUI.Redis;
 using StackExchange.Redis;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace BartenderUI.Util.Factories
 {
@@ -17,7 +19,8 @@ namespace BartenderUI.Util.Factories
                 .AddMouseUpEvent(DragAndDropEvents.MouseUpEventForTable)
                 .AddDoubleClickEvent(DoubleClickEvent.TableDoubleClickEvent)
                 .WithId(RedisRepository.Incr("asztalId"))
-                .WithState(SzabadFoglaltEnum.Szabad);
+                .WithState(SzabadFoglaltEnum.Szabad)
+                .WithIdLabel();
 
             RedisRepository.SAdd("asztalok", pictureBoxBuilder.Id.ToString());
             RedisRepository.HMSet("asztal_" + pictureBoxBuilder.Id, 
@@ -50,7 +53,8 @@ namespace BartenderUI.Util.Factories
                 .AddDoubleClickEvent(DoubleClickEvent.TableDoubleClickEvent)
                 .WithId(id)
                 .WithState(state)
-                .WithLocation(locX, locY);
+                .WithLocation(locX, locY)
+                .WithIdLabel();
 
             switch (enumerator)
             {

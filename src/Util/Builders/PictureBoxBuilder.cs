@@ -100,5 +100,23 @@ namespace BartenderUI.Util.Builders
                     return this; // Should not happen
             }
         }
+
+        public PictureBoxBuilder WithIdLabel()
+        {
+            Paint += new PaintEventHandler((sender, e) =>
+            {
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+
+                string text = Id.ToString();
+
+                SizeF textSize = e.Graphics.MeasureString(text, new Font(FontFamily.GenericSerif, 60));
+                PointF locationToDraw = new PointF();
+                locationToDraw.X = (Width / 2) - (textSize.Width / 2);
+                locationToDraw.Y = (Height / 2) - (textSize.Height / 2);
+
+                e.Graphics.DrawString(text, new Font(FontFamily.GenericSerif, 60), Brushes.Black, locationToDraw);
+            });
+            return this;
+        }
     }
 }

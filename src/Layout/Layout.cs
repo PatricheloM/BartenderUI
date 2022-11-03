@@ -70,10 +70,9 @@ namespace BartenderUI.Layout
             {
                 convertedOrders.Add(PublishedMessageConverter.Convert(order));
             }
+            RedisRepository.Del("new_orders");
             NewOrders newOrders = new NewOrders(convertedOrders);
             newOrders.ShowDialog();
-
-            RedisRepository.Del("new_orders");
         }
     }
 }
