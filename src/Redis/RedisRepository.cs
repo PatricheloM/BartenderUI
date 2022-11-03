@@ -69,6 +69,19 @@ namespace BartenderUI.Redis
             return Array.IndexOf(SMembers(key), value) != -1;
         }
 
+        public static void LPush(string key, params string[] values)
+        {
+            foreach (string value in values)
+            {
+                db.ListLeftPush(key, value);
+            }
+        }
+
+        public static string[] LRange(string key)
+        { 
+            return db.ListRange(key).ToStringArray();
+        }
+
         public static int Incr(string key)
         {
             return Convert.ToInt32(db.StringIncrement(key));

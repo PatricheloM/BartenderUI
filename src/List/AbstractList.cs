@@ -25,7 +25,7 @@ namespace BartenderUI.List
             nameColumn = DataGridViewColumnFactory.Produce("nameColumn", "Tétel", true, 220);
             quantityColumn = DataGridViewColumnFactory.Produce("quantityColumn", "Darabszám", true, 70);
             priceColumn = DataGridViewColumnFactory.Produce("priceColumn", "Ár", true, 100);
-            invoiceColumn = DataGridViewColumnFactory.Produce("invoiceColumn", "Számla", true, 2000);
+            invoiceColumn = DataGridViewColumnFactory.Produce("invoiceColumn", "Számla", true, 200);
 
             dataGridView = new DataGridViewBuilder()
                 .WithAllowUserToResizeColumnsValue(false)

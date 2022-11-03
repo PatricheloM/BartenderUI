@@ -55,10 +55,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layout\AbstractNewOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Layout\Layout.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Layout\AbstractLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layout\NewOrders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="List\AbstractAddItem.cs">
@@ -159,6 +165,8 @@
     <Compile Include="Util\Factories\TableFactory.cs" />
     <Compile Include="Util\HelperTypes\FileDetails.cs" />
     <Compile Include="Util\FileWriter.cs" />
+    <Compile Include="Util\HelperTypes\NewOrder.cs" />
+    <Compile Include="Util\PublishedMessageConverter.cs" />
     <Compile Include="Util\Structs\Base64Struct.cs" />
     <Compile Include="Util\Structs\FileStruct.cs" />
     <Compile Include="Util\Enums\FileTypeEnum.cs" />

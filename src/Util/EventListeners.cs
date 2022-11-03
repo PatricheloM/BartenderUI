@@ -1,7 +1,8 @@
 ﻿using System.Windows.Forms;
 using BartenderUI.Redis;
 using BartenderUI.Util.Builders;
-using BartenderUI.Util.Factories;
+using System.Text.RegularExpressions;
+// using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Util
 {
@@ -20,14 +21,14 @@ namespace BartenderUI.Util
             {
                 layout.Invoke(new MethodInvoker(delegate
                 {
-                    belso.Controls.Clear();
-                    kulso.Controls.Clear();
-                    LayoutFiller.FillLayout(belso, kulso);
-
-                    newOrderIndicator.WithHiddenValue(false);
-
-                    // maybe, depends on frontend and have to decide whether to interrupt the cashier when doing something else
-                    // MessageBoxFactory.Produce(message.Message, MessageBoxFactory.GetNewOrderTitle(), MessageBoxButtons.OK);
+                    if (Regex.IsMatch(message.Message, @"^.+\|\d+\|.+\|.+$"))
+                    {
+                        RedisRepository.LPush("new_orders", message.Message);
+                        newOrderIndicator.WithHiddenValue(false);
+                        belso.Clear();
+                        kulso.Clear();
+                        LayoutFiller.FillLayout(belso, kulso);
+                    }
                 }));
             });
         }
@@ -39,8 +40,8 @@ namespace BartenderUI.Util
             {
                 layout.Invoke(new MethodInvoker(delegate
                 {
-                    belso.Controls.Clear();
-                    kulso.Controls.Clear();
+                    belso.Clear();
+                    kulso.Clear();
                     LayoutFiller.FillLayout(belso, kulso);
                 }));
             });

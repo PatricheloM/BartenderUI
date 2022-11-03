@@ -1,13 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using StackExchange.Redis;
 using BartenderUI.Util.Builders;
 using BartenderUI.Redis;
-using BartenderUI.Util;
+using BartenderUI.Util.HelperTypes;
 
 namespace BartenderUI.Util
 {
     class GridFiller
     {
+        public static void FillGrid(DataGridViewBuilder grid, NewOrder[] orders)
+        {
+            for (int i = 0; grid.Rows.Count > i;)
+            {
+                grid.Rows.RemoveAt(i);
+            }
+
+            foreach (NewOrder order in orders)
+            {
+                grid.Rows.Add(order.Item, order.Quantity, order.Table, order.Invoice);
+            }
+        }
+
         public static void FillGrid(DataGridViewBuilder grid, HashEntry[] entries)
         {
             for (int i = 0; grid.Rows.Count > i;)

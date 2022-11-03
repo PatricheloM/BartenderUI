@@ -62,5 +62,11 @@ namespace BartenderUI.Util.Builders
             Text = value;
             return this;
         }
+
+        public GroupBoxBuilder Clear()
+        {
+            Controls.Clear();
+            return this;
+        }
     }
 }
