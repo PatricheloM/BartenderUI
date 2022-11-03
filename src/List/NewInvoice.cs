@@ -1,6 +1,7 @@
 ﻿using BartenderUI.Redis;
 using BartenderUI.Util.Factories;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BartenderUI.List
@@ -24,6 +25,10 @@ namespace BartenderUI.List
             if (invoiceBox.Text == null || invoiceBox.Text == "" || string.IsNullOrWhiteSpace(invoiceBox.Text))
             {
                 MessageBoxFactory.Produce(MessageBoxFactory.GetEmptyInputText(), MessageBoxFactory.GetEmptyInputTitle(), MessageBoxButtons.OK);
+            }
+            else if (RedisRepository.Keys("szamla_" + invoiceBox.Text).Count() != 0)
+            {
+                MessageBoxFactory.Produce(MessageBoxFactory.GetInvoiceExistsErrorText(), MessageBoxFactory.GetInvoiceExistsErrorTitle(), MessageBoxButtons.OK);
             }
             else
             {

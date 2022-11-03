@@ -15,7 +15,7 @@ namespace BartenderUI.Layout
 
         private ButtonBuilder exitButton;
         private ButtonBuilder minimizeButton;
-        private ButtonBuilder itallapButton;
+        private ButtonBuilder menuButton;
         private ButtonBuilder kifizetesButton;
         private ButtonBuilder resetButton;
 
@@ -28,7 +28,7 @@ namespace BartenderUI.Layout
         protected abstract void PluszKulsoButtonClickEvent(object sender, EventArgs e);
         protected abstract void ExitButtonClickEvent(object sender, EventArgs e);
         protected abstract void MinimizeButtonClickEvent(object sender, EventArgs e);
-        protected abstract void ItallapButtonClickEvent(object sender, EventArgs e);
+        protected abstract void MenuButtonClickEvent(object sender, EventArgs e);
         protected abstract void KifizetesButtonClickEvent(object sender, EventArgs e);
         protected abstract void ResetButtonClickEvent(object sender, EventArgs e);
         protected abstract void NewOrderLabelClickEvent(object sender, EventArgs e);
@@ -67,13 +67,13 @@ namespace BartenderUI.Layout
                 .WithText("_")
                 .AddClickEvent(MinimizeButtonClickEvent);
 
-            itallapButton = new ButtonBuilder()
-                .WithFont("Microsoft Sans Serif", 18F, FontStyle.Bold)
+            menuButton = new ButtonBuilder()
+                .WithFont("Microsoft Sans Serif", 20F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 225, 5)
-                .WithName("itallapButton")
+                .WithName("menuButton")
                 .WithSize(110, 50)
-                .WithText("Itallap")
-                .AddClickEvent(ItallapButtonClickEvent);
+                .WithText("Menü")
+                .AddClickEvent(MenuButtonClickEvent);
 
             kifizetesButton = new ButtonBuilder()
                 .WithFont("Microsoft Sans Serif", 18F, FontStyle.Bold)
@@ -116,7 +116,7 @@ namespace BartenderUI.Layout
                 .WithName("Layout")
                 .WithText("Bartender")
                 .WithIcon(FilePathStruct.Icon)
-                .AddAll(pluszBelso, pluszKulso, resetButton, itallapButton, kifizetesButton, minimizeButton, exitButton, groupBoxBelso, groupBoxKulso, newOrderLabel);
+                .AddAll(pluszBelso, pluszKulso, resetButton, menuButton, kifizetesButton, minimizeButton, exitButton, groupBoxBelso, groupBoxKulso, newOrderLabel);
         }
     }
 }
