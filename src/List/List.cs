@@ -24,10 +24,5 @@ namespace BartenderUI.List
             addItem.ShowDialog();
             GridFiller.FillGrid(dataGridView, id);
         }
-
-        protected override void RemoveItemButtonClickEvent(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

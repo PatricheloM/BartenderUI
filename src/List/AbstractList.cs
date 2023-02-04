@@ -14,10 +14,8 @@ namespace BartenderUI.List
         private DataGridViewTextBoxColumnBuilder invoiceColumn;
 
         private ButtonBuilder addItem;
-        private ButtonBuilder removeItem;
 
         protected abstract void AddItemButtonClickEvent(object sender, EventArgs e);
-        protected abstract void RemoveItemButtonClickEvent(object sender, EventArgs e);
 
 
         public void InitializeComponents()
@@ -36,22 +34,15 @@ namespace BartenderUI.List
                 .WithLocation(10, 10)
                 .WithName("dataGridView")
                 .WithScrollBars(ScrollBars.Vertical)
-                .WithSize(590, 490)
+                .WithSize(590, 535)
                 .AddColumns(nameColumn, quantityColumn, priceColumn, invoiceColumn);
 
             addItem = new ButtonBuilder()
                 .WithName("addItem")
                 .WithText("Tétel hozzáadása")
                 .WithSize(590, 45)
-                .WithLocation(10, 510)
+                .WithLocation(10, 555)
                 .AddClickEvent(AddItemButtonClickEvent);
-
-            removeItem = new ButtonBuilder()
-                .WithName("removeItem")
-                .WithText("Tétel eltávolítása")
-                .WithSize(590, 45)
-                .WithLocation(10, 560)
-                .AddClickEvent(RemoveItemButtonClickEvent);
 
             GetInstance()
                 .WithClientSize(610, 610)
@@ -60,7 +51,7 @@ namespace BartenderUI.List
                 .WithText("Számla lista")
                 .WithShowIconValue(false)
                 .WithShowInTaskbarValue(false)
-                .AddAll(dataGridView, addItem, removeItem);
+                .AddAll(dataGridView, addItem);
         }
     }
 }
