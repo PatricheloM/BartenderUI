@@ -3,23 +3,22 @@ using System.Windows.Forms;
 using StackExchange.Redis;
 using BartenderUI.Redis;
 using System.Collections.Generic;
-using System.Drawing;
 using BartenderUI.Util.Builders;
 using BartenderUI.Util;
 using BartenderUI.Util.Factories;
 using BartenderUI.Util.Events;
+using System.Linq;
 
 namespace BartenderUI.Payment
 {
     class Payment : AbstractPayment
     {
-        private Dictionary<string, List<string>> invoiceList = new Dictionary<string, List<string>>();
+        private List<string> invoiceList = new List<string>();
         private List<LabelBuilder> itemLabels = new List<LabelBuilder>();
 
         public Payment()
         {
             InitializeComponents();
-            RefreshDictionary();
             RefreshInvoicesComboBox();
         }
 
@@ -49,18 +48,13 @@ namespace BartenderUI.Payment
                 {
                     string selected = invoices.SelectedItem.ToString();
                     RedisRepository.Del("szamla_" + selected);
-                    foreach (var entry in invoiceList)
-                    {
-                        if (entry.Value.Contains(selected))
-                        {
-                            RedisRepository.SRem(entry.Key, selected);
-                            if (RedisRepository.SMembers(entry.Key).Length == 0)
-                            {
-                                RedisRepository.HMSet(entry.Key.Replace("szamlak_", "asztal_"), new HashEntry("state", SzabadFoglaltEnum.Szabad.ToString()));
-                            }
-                        }
-                    }
-                    RefreshDictionary();
+                    invoiceList.ForEach(sz => {
+                        RedisRepository.Keys("szamlak_*").ToList().ForEach(sc => {
+                            RedisRepository.SRem(sc, selected);
+                            if (RedisRepository.SMembers(sc).Length == 0)
+                                RedisRepository.HMSet(sc.ToString().Replace("szamlak_", "asztal_"), new HashEntry("state", SzabadFoglaltEnum.Szabad.ToString()));
+                        });
+                    });
                     RefreshInvoicesComboBox();
                     payButton.WithText("Válasszon számlát!");
                     invoices.SelectedItem = null;
@@ -69,32 +63,13 @@ namespace BartenderUI.Payment
             }
         }
 
-        private void RefreshDictionary()
-        {
-            invoiceList.Clear();
-            foreach (RedisKey key in RedisRepository.Keys("szamlak_*"))
-            {
-                List<string> list = new List<string>();
-                foreach (string value in RedisRepository.SMembers(key))
-                {
-                    list.Add(value);
-                }
-                invoiceList.Add(key, list);
-            }
-        }
 
         private void RefreshInvoicesComboBox()
         {
+            invoiceList.Clear();
             invoices.Clear();
-            List<string> addable = new List<string>();
-            foreach (var entry in invoiceList)
-            {
-                foreach (var invoice in entry.Value)
-                {
-                    addable.Add(invoice);
-                }
-            }
-            invoices.AddAll(addable.ToArray());
+            invoiceList = RedisRepository.Keys("szamla_*").ToList().Select(s => s.ToString().Replace("szamla_", "")).ToList();
+            invoices.AddAll(invoiceList.ToArray());
         }
     }
 }

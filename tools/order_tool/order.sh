@@ -30,6 +30,7 @@ re='^[0-9]+$'
 if ! [[ $QUANTITY =~ $re ]]
 then
    echo "Not a number"
+   echo
    exit 1
 fi
 echo -n Table: 

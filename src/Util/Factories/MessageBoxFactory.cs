@@ -41,7 +41,7 @@ namespace BartenderUI.Util.Factories
         private readonly static string PAID_WARNING_TEXT = "Biztos ki lett fizetve a számla?";
         private readonly static string PAID_WARNING_TITLE = "Kifizetés";
 
-        private readonly static string INVOICE_EXISTS_ERROR_TEXT = "Ez a számla már egy másik asztalon létezik!";
+        private readonly static string INVOICE_EXISTS_ERROR_TEXT = "Ez a számla már egy másik asztalon létezik! Szeretné átmásolni erre az asztalra is?";
         private readonly static string INVOICE_EXISTS_ERROR_TITLE = "Létező számla";
 
         public static DialogResult Produce(string text, string title, MessageBoxButtons buttons) 
