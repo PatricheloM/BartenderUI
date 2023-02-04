@@ -3,8 +3,8 @@
 host=$(cat connection.json | jq '.host' | tr -d '"')
 port=$(cat connection.json | jq '.port')
 echo -n Password: 
-read -s password
-authComm=$(sed "s/#PASS/$password/g" command_templates/auth.redis)
+read -s PASS
+authComm=$(PASS=$PASS mo command_templates/auth.mustache)
 resCode=$(redis-cli -h $host -p $port $authComm)
 if [[ "$resCode" != "OK" ]]
 then
@@ -15,9 +15,9 @@ fi
 echo $resCode
 echo
 echo -n Item: 
-read item
-itemExistsComm=$(sed "s/#ITEM/$item/g" command_templates/item_check.redis)
-resCode=$(redis-cli -h $host -p $port -a $password --no-auth-warning $itemExistsComm)
+read ITEM
+itemExistsComm=$(ITEM=$ITEM mo command_templates/item_check.mustache)
+resCode=$(redis-cli -h $host -p $port -a $PASS --no-auth-warning $itemExistsComm)
 if [[ $resCode == 0 ]]
 then
 	echo Item does not exist
@@ -25,17 +25,17 @@ then
 	exit 1
 fi
 echo -n Quantity: 
-read quantity
+read QUANTITY
 re='^[0-9]+$'
-if ! [[ $quantity =~ $re ]]
+if ! [[ $QUANTITY =~ $re ]]
 then
    echo "Not a number"
    exit 1
 fi
 echo -n Table: 
-read table
-tableExistsComm=$(sed "s/#TABLENUM/$table/g" command_templates/tablenum_check.redis)
-resCode=$(redis-cli -h $host -p $port -a $password --no-auth-warning $tableExistsComm)
+read TABLENUM
+tableExistsComm=$(TABLENUM=$TABLENUM mo command_templates/tablenum_check.mustache)
+resCode=$(redis-cli -h $host -p $port -a $PASS --no-auth-warning $tableExistsComm)
 if [[ $resCode == 0 ]]
 then
 	echo Table does not exist
@@ -43,7 +43,7 @@ then
 	exit 1
 fi
 echo -n Invoice: 
-read invoice
-publishComm=$(sed -e "s/#ITEM/$item/g" -e "s/#TABLENUM/$table/g" -e "s/#QUANTITY/$quantity/g" -e "s/#INVOICE/$invoice/g" command_templates/publish.redis)
-resCode=$(redis-cli -h $host -p $port -a $password --no-auth-warning $publishComm)
+read INVOICE
+publishComm=$(ITEM=$ITEM QUANTITY=$QUANTITY TABLENUM=$TABLENUM INVOICE=$INVOICE mo command_templates/publish.mustache)
+resCode=$(redis-cli -h $host -p $port -a $PASS --no-auth-warning $publishComm)
 exit 0
