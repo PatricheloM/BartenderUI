@@ -2,6 +2,9 @@
 using BartenderUI.Redis;
 using BartenderUI.Util.Builders;
 using System.Text.RegularExpressions;
+using BartenderUI.Util.HelperTypes;
+using System;
+using StackExchange.Redis;
 // using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Util
@@ -21,9 +24,12 @@ namespace BartenderUI.Util
             {
                 layout.Invoke(new MethodInvoker(delegate
                 {
-                    if (Regex.IsMatch(message.Message, @"^.+\|\d+\|.+\|.+$"))
+                    if (Regex.IsMatch(message.Message, @"^.+\|\d+\|\d+\|.+$"))
                     {
                         RedisRepository.LPush("new_orders", message.Message);
+                        NewOrder newOrder = PublishedMessageConverter.Convert(message.Message);
+                        OrderHelper.PushItemToRedis(Convert.ToInt32(newOrder.Table), newOrder.Invoice, newOrder.Item, Convert.ToInt32(newOrder.Quantity));
+                        RedisRepository.HMSet("asztal_" + newOrder.Table, new HashEntry("state", SzabadFoglaltEnum.Foglalt.ToString()));
                         newOrderIndicator.WithHiddenValue(false);
                         belso.Clear();
                         kulso.Clear();

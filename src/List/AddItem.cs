@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BartenderUI.Redis;
+using BartenderUI.Util;
 using BartenderUI.Util.Factories;
 using StackExchange.Redis;
 
@@ -15,12 +16,6 @@ namespace BartenderUI.List
         {
             InitializeComponents(id);
             this.id = id;
-        }
-
-        private void PushItemToRedis(string invoice, string name, int quantity)
-        {
-            RedisRepository.SAdd("szamlak_" + id, invoice);
-            RedisRepository.HIncrBy("szamla_" + invoice, name, quantity);
         }
 
         protected override void AddButtonClickEvent(object sender, EventArgs e)
@@ -53,7 +48,7 @@ namespace BartenderUI.List
                     }
                     else
                     {
-                        PushItemToRedis(invoiceBox.Text, nameBox.Text, Convert.ToInt32(quantityBox.Text));
+                        OrderHelper.PushItemToRedis(id, invoiceBox.Text, nameBox.Text, Convert.ToInt32(quantityBox.Text));
                         Close();
                     }
                 }

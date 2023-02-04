@@ -1,1 +1,1 @@
-publish new_order #ITEM|#QUANTITY|Asztal_#TABLENUM|#INVOICE
+publish new_order #ITEM|#QUANTITY|#TABLENUM|#INVOICE

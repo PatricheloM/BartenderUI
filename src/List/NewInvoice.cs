@@ -1,4 +1,5 @@
 ﻿using BartenderUI.Redis;
+using BartenderUI.Util;
 using BartenderUI.Util.Factories;
 using System;
 using System.Linq;
@@ -32,8 +33,7 @@ namespace BartenderUI.List
             }
             else
             {
-                RedisRepository.SAdd("szamlak_" + id, invoiceBox.Text);
-                RedisRepository.HIncrBy("szamla_" + invoiceBox.Text, name, quantity);
+                OrderHelper.PushItemToRedis(id, invoiceBox.Text, name, quantity);
                 Close();
             }
         }
