@@ -1,4 +1,6 @@
 ﻿using BartenderUI.Redis;
+using BartenderUI.Util.Events;
+using StackExchange.Redis;
 
 namespace BartenderUI.Util
 {
@@ -8,6 +10,8 @@ namespace BartenderUI.Util
         {
             RedisRepository.SAdd("szamlak_" + tableId, invoice);
             RedisRepository.HIncrBy("szamla_" + invoice, name, quantity);
+            RedisRepository.HMSet("asztal_" + tableId, new HashEntry("state", SzabadFoglaltEnum.Foglalt.ToString()));
+            RefreshEvent.Invoke();
         }
     }
 }

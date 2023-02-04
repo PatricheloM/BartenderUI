@@ -23,8 +23,6 @@ namespace BartenderUI.List
             AddItem addItem = new AddItem(id);
             addItem.ShowDialog();
             GridFiller.FillGrid(dataGridView, id);
-            if (RedisRepository.Exists("szamlak_" + id)) RedisRepository.HMSet("asztal_" + id, new HashEntry("state", SzabadFoglaltEnum.Foglalt.ToString()));
-            RefreshEvent.Invoke();
         }
 
         protected override void RemoveItemButtonClickEvent(object sender, EventArgs e)

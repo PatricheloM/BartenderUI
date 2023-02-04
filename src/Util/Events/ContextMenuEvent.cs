@@ -13,7 +13,7 @@ namespace BartenderUI.Util.Events
             if (e.Button == MouseButtons.Right)
             {
                 ContextMenuBuilder contextMenuBuilder = new ContextMenuBuilder()
-                    .AddAll(new ContextMenuEntry("Asztal törlése", HideEvents.CallForTableContextMenuEvent), new ContextMenuEntry("Asztal ürítése", ClearTableEvent.ClearTableEventForTableContextMenu));
+                    .AddAll(new ContextMenuEntry("Asztal törlése", HideEvents.CallForTableContextMenuEvent));
 
                 control.ContextMenu = contextMenuBuilder;
             }

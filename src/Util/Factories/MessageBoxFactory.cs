@@ -1,5 +1,4 @@
-﻿using StackExchange.Redis;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace BartenderUI.Util.Factories
@@ -18,10 +17,10 @@ namespace BartenderUI.Util.Factories
         private readonly static string EMPTY_INPUT_TEXT = "Üresen hagyott mező!";
         private readonly static string EMPTY_INPUT_TITLE = "Üres mező";
 
-        private readonly static string NOT_EMPTY_TABLE_TEXT = "Az asztalon van rendezetlen tétel!\nBiztos törli?";
+        private readonly static string NOT_EMPTY_TABLE_TEXT = "Az asztalon van rendezetlen tétel!";
         private readonly static string NOT_EMPTY_TABLE_TITLE = "Rendezetlen asztal";
 
-        private readonly static string DELETE_ALL_TABLE_TEXT = "Biztos törli az összes asztalt?";
+        private readonly static string DELETE_ALL_TABLE_TEXT = "Biztos törli az összes asztalt?\nEzzel az asztalokon az összes törlésre kerül!";
         private readonly static string DELETE_ALL_TABLE_TITLE = "Reset";
 
         private readonly static string FILE_IN_USE_TEXT = "A fájl használatban van!\nZárja be a programot ami használja és próbálja meg újra!";

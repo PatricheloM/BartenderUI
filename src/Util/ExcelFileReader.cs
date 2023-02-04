@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 using ExcelDataReader;
-using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Util
 {

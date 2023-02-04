@@ -27,10 +27,6 @@ namespace BartenderUI.List
             {
                 MessageBoxFactory.Produce(MessageBoxFactory.GetEmptyInputText(), MessageBoxFactory.GetEmptyInputTitle(), MessageBoxButtons.OK);
             }
-            else if (RedisRepository.Keys("szamla_" + invoiceBox.Text).Count() != 0)
-            {
-                MessageBoxFactory.Produce(MessageBoxFactory.GetInvoiceExistsErrorText(), MessageBoxFactory.GetInvoiceExistsErrorTitle(), MessageBoxButtons.OK);
-            }
             else
             {
                 OrderHelper.PushItemToRedis(id, invoiceBox.Text, name, quantity);

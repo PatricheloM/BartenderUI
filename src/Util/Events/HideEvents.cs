@@ -13,11 +13,7 @@ namespace BartenderUI.Util.Events
             PictureBoxBuilder table = menuItem.GetContextMenu().SourceControl as PictureBoxBuilder;
             if (table.State == SzabadFoglaltEnum.Foglalt)
             {
-                if (MessageBoxFactory.Produce(MessageBoxFactory.GetNotEmptyTableText(), MessageBoxFactory.GetNotEmptyTableTitle(), MessageBoxButtons.YesNo) == MessageBoxFactory.GetPositiveResult())
-                {
-                    InvoiceDeleteHelper.DeleteTable(table.Id.ToString());
-                    table.Hide();
-                }
+                MessageBoxFactory.Produce(MessageBoxFactory.GetNotEmptyTableText(), MessageBoxFactory.GetNotEmptyTableTitle(), MessageBoxButtons.OK);
             }
             else 
             {
