@@ -21,6 +21,7 @@
 
 ## Main functionalities:
  - Customizable table distribution
+ - Easy menu population with built in Excel sheet reader
  - Logging invoices on tables with a friendly, easy-to-understand business logic
  - Payment separation for invoices with a built in calculator to make receipts
  - Easy third party implementation
