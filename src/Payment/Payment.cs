@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using StackExchange.Redis;
 using BartenderUI.Redis;
 using System.Collections.Generic;
-using BartenderUI.Util.Builders;
 using BartenderUI.Util;
 using BartenderUI.Util.Factories;
 using BartenderUI.Util.Events;
@@ -14,7 +13,6 @@ namespace BartenderUI.Payment
     class Payment : AbstractPayment
     {
         private List<string> invoiceList = new List<string>();
-        private List<LabelBuilder> itemLabels = new List<LabelBuilder>();
 
         public Payment()
         {
@@ -27,14 +25,7 @@ namespace BartenderUI.Payment
             if (!(invoices.SelectedItem is null))
             {
                 string selected = invoices.SelectedItem.ToString();
-                HashEntry[] entries = RedisRepository.HGetAll("szamla_" + selected);
-                int lineSpacing = 0;
-                foreach (HashEntry entry in entries)
-                {
-                    // TODO
-
-                    lineSpacing++;
-                }
+                GridFiller.FillGrid(dataGridView, selected);
 
                 payButton.WithText("Kifizetve: " + PriceCalculator.CalculateFullInvoice(selected) + " Ft");
             }

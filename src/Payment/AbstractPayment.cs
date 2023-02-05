@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using BartenderUI.Util.Builders;
+using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Payment
 {
@@ -13,27 +14,31 @@ namespace BartenderUI.Payment
 
         protected ButtonBuilder payButton;
 
-        protected PanelBuilder panel;
-
-        private GroupBoxBuilder groupBox;
+        protected DataGridViewBuilder dataGridView;
+        private DataGridViewTextBoxColumnBuilder itemColumn;
+        private DataGridViewTextBoxColumnBuilder quantityColumn;
+        private DataGridViewTextBoxColumnBuilder priceColumn;
 
         protected abstract void PayButtonClickEvent(object sender, EventArgs e);
         protected abstract void InvoicesSelectedIndexChangedEvent(object sender, EventArgs e);
 
         protected void InitializeComponents()
         {
-            panel = new PanelBuilder()
-                .WithLocation(21, 54)
-                .WithName("panel")
-                .WithSize(441, 366)
-                .WithAutoScrollValue(true);
+            itemColumn = DataGridViewColumnFactory.Produce("itemColumn", "Tétel", true, 230);
+            quantityColumn = DataGridViewColumnFactory.Produce("quantityColumn", "Darabszám", true, 71);
+            priceColumn = DataGridViewColumnFactory.Produce("priceColumn", "Ár", true, 135);
 
-            groupBox = new GroupBoxBuilder()
-                .WithLocation(15, 35)
-                .WithName("groupBox")
-                .WithSize(453, 391)
-                .WithTabStopValue(false)
-                .WithText("Tételek:");
+            dataGridView = new DataGridViewBuilder()
+                .WithAllowUserToResizeColumnsValue(false)
+                .WithAllowUserToResizeRowsValue(false)
+                .WithRowHeadersVisibleValue(false)
+                .WithAllowUserToAddRowsValue(false)
+                .WithColumnHeadersHeightSizeMode(DataGridViewColumnHeadersHeightSizeMode.AutoSize)
+                .WithLocation(21, 54)
+                .WithName("dataGridView")
+                .WithScrollBars(ScrollBars.Vertical)
+                .WithSize(441, 366)
+                .AddColumns(itemColumn, quantityColumn, priceColumn);
 
             infoLabel = new LabelBuilder()
                 .WithAutoSizeValue(true)
@@ -65,7 +70,7 @@ namespace BartenderUI.Payment
                 .WithShowIconValue(false)
                 .WithShowInTaskbarValue(false)
                 .WithText("Számla kifizetése")
-                .AddAll(groupBox, panel, infoLabel, payButton, invoices);
+                .AddAll(dataGridView, infoLabel, payButton, invoices);
         }
     }
 }

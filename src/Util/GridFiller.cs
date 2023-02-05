@@ -53,5 +53,21 @@ namespace BartenderUI.Util
                 }
             }
         }
+
+        public static void FillGrid(DataGridViewBuilder grid, string invoice)
+        {
+            for (int i = 0; grid.Rows.Count > i;)
+            {
+                grid.Rows.RemoveAt(i);
+            }
+
+            foreach (HashEntry item in RedisRepository.HGetAll("szamla_" + invoice))
+            {
+                grid.Rows.Add(
+                    item.Name,
+                    item.Value,
+                    PriceCalculator.Visualizer(item.Name, Convert.ToInt32(item.Value)));
+            }
+        }
     }
 }
