@@ -5,15 +5,16 @@ const client = redis.createClient({
 });
 
 module.exports = {
-    getAllTables: async function () { //TODO
+    getAllTables: async function () {
         await client.connect();
         const value = await client.sMembers('asztalok');
         
         let tables = []
 
-        for(let i in value) {    
-
-            const item = await client.hGetAll('asztal_' + i);
+        for(let i of value) {
+            let item = await client.hGetAll('asztal_' + i);
+            const invoices = await client.sMembers('szamlak_' + i);
+            item["invoices"] = invoices;
             tables.push(item);
         }
         await client.disconnect();
