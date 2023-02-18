@@ -13,8 +13,7 @@ module.exports = {
 
         for(let i of value) {
             let item = await client.hGetAll('asztal_' + i);
-            const invoices = await client.sMembers('szamlak_' + i);
-            item["invoices"] = invoices;
+            item["invoices"] = await client.sMembers('szamlak_' + i);
             tables.push(item);
         }
         await client.disconnect();
