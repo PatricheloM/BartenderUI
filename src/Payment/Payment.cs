@@ -49,6 +49,7 @@ namespace BartenderUI.Payment
                     RefreshInvoicesComboBox();
                     payButton.WithText("Válasszon számlát!");
                     invoices.SelectedItem = null;
+                    dataGridView.Rows.Clear();
                     RefreshEvent.Invoke();
                 }
             }
