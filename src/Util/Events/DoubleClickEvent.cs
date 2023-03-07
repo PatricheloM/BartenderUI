@@ -1,5 +1,6 @@
 ﻿using System;
-using BartenderUI.Util.Builders;
+using System.Windows.Forms;
+using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.Util.Events
 {
@@ -7,8 +8,8 @@ namespace BartenderUI.Util.Events
     {
         public static void TableDoubleClickEvent(object sender, EventArgs e)
         {
-            PictureBoxBuilder pictureBoxBuilder = sender as PictureBoxBuilder;
-            List.List list = new List.List(pictureBoxBuilder.Id);
+            PictureBox pictureBox = sender as PictureBox;
+            List.List list = new List.List(pictureBox.GetId());
             list.ShowDialog();
         }
     }

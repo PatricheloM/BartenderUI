@@ -6,6 +6,7 @@ using BartenderUI.Util.Events;
 using BartenderUI.Util.Factories;
 using BartenderUI.Redis;
 using BartenderUI.Util.HelperTypes;
+using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.Layout
 {
@@ -37,7 +38,7 @@ namespace BartenderUI.Layout
 
         protected override void MinimizeButtonClickEvent(object sender, EventArgs e)
         {
-            GetInstance()
+            this
                 .WithState(FormWindowState.Minimized);
         }
 

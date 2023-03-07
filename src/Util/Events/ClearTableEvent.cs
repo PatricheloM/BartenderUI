@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.Util.Events
 {
@@ -9,8 +9,8 @@ namespace BartenderUI.Util.Events
         public static void ClearTableEventForTableContextMenu(object sender, EventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            PictureBoxBuilder table = menuItem.GetContextMenu().SourceControl as PictureBoxBuilder;
-            InvoiceDeleteHelper.DeleteInvoices(table.Id);
+            PictureBox table = menuItem.GetContextMenu().SourceControl as PictureBox;
+            InvoiceDeleteHelper.DeleteInvoices(table.GetId());
         }
     }
 }

@@ -1,17 +1,16 @@
-﻿using BartenderUI.Util.Builders;
+﻿using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Events;
 using BartenderUI.Redis;
 using StackExchange.Redis;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace BartenderUI.Util.Factories
 {
     class TableFactory
     {
-        public static PictureBoxBuilder Produce(TablePlaceEnum enumerator)
+        public static PictureBox Produce(TablePlaceEnum enumerator)
         {
-            PictureBoxBuilder pictureBoxBuilder = new PictureBoxBuilder()
+            PictureBox pictureBox = new PictureBox()
                 .WithSize(100, 100)
                 .WithLocation(50, 50)
                 .AddMouseDownEvent(DragAndDropEvents.MouseDownEvent)
@@ -22,30 +21,30 @@ namespace BartenderUI.Util.Factories
                 .WithState(SzabadFoglaltEnum.Szabad)
                 .WithIdLabel();
 
-            RedisRepository.SAdd("asztalok", pictureBoxBuilder.Id.ToString());
-            RedisRepository.HMSet("asztal_" + pictureBoxBuilder.Id, 
-                new HashEntry("X", pictureBoxBuilder.Location.X),
-                new HashEntry("Y", pictureBoxBuilder.Location.Y),
-                new HashEntry("state", pictureBoxBuilder.State.ToString()),
+            RedisRepository.SAdd("asztalok", pictureBox.GetId().ToString());
+            RedisRepository.HMSet("asztal_" + pictureBox.GetId(), 
+                new HashEntry("X", pictureBox.Location.X),
+                new HashEntry("Y", pictureBox.Location.Y),
+                new HashEntry("state", pictureBox.GetState().ToString()),
                 new HashEntry("place", enumerator.ToString()),
-                new HashEntry("id", pictureBoxBuilder.Id));
+                new HashEntry("id", pictureBox.GetId()));
 
             switch (enumerator)
             {
                 case TablePlaceEnum.Belso:
-                    pictureBoxBuilder.AddMouseMoveEvent(DragAndDropEvents.MouseMoveBelsoEvent);
+                    pictureBox.AddMouseMoveEvent(DragAndDropEvents.MouseMoveBelsoEvent);
                     break;
                 case TablePlaceEnum.Kulso:
-                    pictureBoxBuilder.AddMouseMoveEvent(DragAndDropEvents.MouseMoveKulsoEvent);
+                    pictureBox.AddMouseMoveEvent(DragAndDropEvents.MouseMoveKulsoEvent);
                     break;
             }
 
-            return pictureBoxBuilder;
+            return pictureBox;
         }
 
-        public static PictureBoxBuilder Produce(int id, int locX, int locY, SzabadFoglaltEnum state, TablePlaceEnum enumerator)
+        public static PictureBox Produce(int id, int locX, int locY, SzabadFoglaltEnum state, TablePlaceEnum enumerator)
         {
-            PictureBoxBuilder pictureBoxBuilder = new PictureBoxBuilder()
+            PictureBox pictureBox = new PictureBox()
                 .WithSize(100, 100)
                 .AddMouseDownEvent(DragAndDropEvents.MouseDownEvent)
                 .AddMouseDownEvent(ContextMenuEvent.MouseDownEvent)
@@ -59,14 +58,14 @@ namespace BartenderUI.Util.Factories
             switch (enumerator)
             {
                 case TablePlaceEnum.Belso:
-                    pictureBoxBuilder.AddMouseMoveEvent(DragAndDropEvents.MouseMoveBelsoEvent);
+                    pictureBox.AddMouseMoveEvent(DragAndDropEvents.MouseMoveBelsoEvent);
                     break;
                 case TablePlaceEnum.Kulso:
-                    pictureBoxBuilder.AddMouseMoveEvent(DragAndDropEvents.MouseMoveKulsoEvent);
+                    pictureBox.AddMouseMoveEvent(DragAndDropEvents.MouseMoveKulsoEvent);
                     break;
             }
 
-            return pictureBoxBuilder;
+            return pictureBox;
         }
     }
 }

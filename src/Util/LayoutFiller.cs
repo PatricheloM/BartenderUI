@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Windows.Forms;
 using BartenderUI.Redis;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Util
 {
     class LayoutFiller
     {
-        public static void FillLayout(GroupBoxBuilder belso, GroupBoxBuilder kulso)
+        public static void FillLayout(GroupBox belso, GroupBox kulso)
         {
             foreach (string tableId in RedisRepository.SMembers("asztalok"))
             {
-                PictureBoxBuilder table = TableFactory.Produce(
+                PictureBox table = TableFactory.Produce(
                     Convert.ToInt32(tableId),
                     Convert.ToInt32(RedisRepository.HGet("asztal_" + tableId, "X")),
                     Convert.ToInt32(RedisRepository.HGet("asztal_" + tableId, "Y")), 

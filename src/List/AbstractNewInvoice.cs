@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.List
 {
-    abstract class AbstractNewInvoice : FormBuilder
+    abstract class AbstractNewInvoice : Form
     {
-        private ButtonBuilder addButton;
-        private ButtonBuilder undoButton;
+        private Button addButton;
+        private Button undoButton;
 
-        private LabelBuilder infoLabel;
+        private Label infoLabel;
 
-        protected TextBoxBuilder invoiceBox;
+        protected TextBox invoiceBox;
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
@@ -20,33 +20,33 @@ namespace BartenderUI.List
         protected void InitializeComponents()
         {
 
-            addButton = new ButtonBuilder()
+            addButton = new Button()
                 .WithLocation(12, 58)
                 .WithSize(118, 23)
                 .WithName("addButton")
                 .WithText("Oké")
                 .AddClickEvent(AddButtonClickEvent);
 
-            undoButton = new ButtonBuilder()
+            undoButton = new Button()
                 .WithLocation(136, 58)
                 .WithSize(75, 23)
                 .WithName("undoButton")
                 .WithText("Mégsem")
                 .AddClickEvent(UndoButtonClickEvent);
 
-            invoiceBox = new TextBoxBuilder()
+            invoiceBox = new TextBox()
                 .WithLocation(12, 25)
                 .WithSize(198, 20)
                 .WithName("invoiceBox")
                 .AddKeyDownEvent(BoxKeyDownEvent);
 
-            infoLabel = new LabelBuilder()
+            infoLabel = new Label()
                 .WithLocation(12, 5)
                 .WithSize(64, 13)
                 .WithName("infoLabel")
                 .WithText("Számla:");
 
-            GetInstance()
+            this
                 .WithClientSize(223, 88)
                 .WithName("NewInvoice")
                 .WithText("Új számla")

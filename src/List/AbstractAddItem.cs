@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BartenderUI.Redis;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using StackExchange.Redis;
 
 namespace BartenderUI.List
 {
-    abstract class AbstractAddItem : FormBuilder
+    abstract class AbstractAddItem : Form
     {
-        private ButtonBuilder addButton;
-        private ButtonBuilder undoButton;
+        private Button addButton;
+        private Button undoButton;
 
-        private LabelBuilder nameLabel;
-        private LabelBuilder quantityLabel;
-        private LabelBuilder invoiceLabel;
+        private Label nameLabel;
+        private Label quantityLabel;
+        private Label invoiceLabel;
 
-        protected ComboBoxBuilder nameBox;
-        protected NumericUpDownBuilder quantityBox;
-        protected ComboBoxBuilder invoiceBox;
+        protected ComboBox nameBox;
+        protected NumericUpDown quantityBox;
+        protected ComboBox invoiceBox;
 
         protected abstract void AddButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
@@ -33,52 +33,52 @@ namespace BartenderUI.List
                 names.Add(item.Name);
             }
 
-            addButton = new ButtonBuilder()
+            addButton = new Button()
                 .WithLocation(12, 118)
                 .WithSize(118, 23)
                 .WithName("addButton")
                 .WithText("Oké")
                 .AddClickEvent(AddButtonClickEvent);
 
-            undoButton = new ButtonBuilder()
+            undoButton = new Button()
                 .WithLocation(136, 118)
                 .WithSize(75, 23)
                 .WithName("undoButton")
                 .WithText("Mégsem")
                 .AddClickEvent(UndoButtonClickEvent);
 
-            nameLabel = new LabelBuilder()
+            nameLabel = new Label()
                 .WithLocation(13, 13)
                 .WithSize(64, 13)
                 .WithName("nameLabel")
                 .WithText("Termék név");
 
-            quantityLabel = new LabelBuilder()
+            quantityLabel = new Label()
                 .WithLocation(13, 48)
                 .WithSize(35, 13)
                 .WithName("quantityLabel")
                 .WithText("Darabszám");
 
-            invoiceLabel = new LabelBuilder()
+            invoiceLabel = new Label()
                 .WithLocation(13, 83)
                 .WithSize(35, 13)
                 .WithName("invoiceLabel")
                 .WithText("Számla");
 
-            nameBox = new ComboBoxBuilder()
+            nameBox = new ComboBox()
                 .WithLocation(83, 10)
                 .WithSize(128, 20)
                 .WithName("nameBox")
                 .AddAll(names.ToArray())
                 .WithAutoCompleteSource(names.ToArray());
 
-            quantityBox = new NumericUpDownBuilder()
+            quantityBox = new NumericUpDown()
                 .WithLocation(83, 45)
                 .WithSize(128, 20)
                 .WithName("quantityBox")
                 .WithValue(1);
 
-            invoiceBox = new ComboBoxBuilder()
+            invoiceBox = new ComboBox()
                 .WithLocation(83, 80)
                 .WithSize(128, 20)
                 .WithName("invoiceBox")
@@ -87,7 +87,7 @@ namespace BartenderUI.List
                 .AddAll(new string[] { "<Új számla>"})
                 .WithDefaultValue("<Új számla>");
 
-            GetInstance()
+            this
                 .WithClientSize(223, 156)
                 .WithName("AddItem")
                 .WithText("Tétel hozzáadás")

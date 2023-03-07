@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.List
 {
-    abstract class AbstractList : FormBuilder
+    abstract class AbstractList : Form
     {
-        protected DataGridViewBuilder dataGridView;
-        private DataGridViewTextBoxColumnBuilder nameColumn;
-        private DataGridViewTextBoxColumnBuilder quantityColumn;
-        private DataGridViewTextBoxColumnBuilder priceColumn;
-        private DataGridViewTextBoxColumnBuilder invoiceColumn;
+        protected DataGridView dataGridView;
+        private DataGridViewTextBoxColumn nameColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewTextBoxColumn priceColumn;
+        private DataGridViewTextBoxColumn invoiceColumn;
 
-        private ButtonBuilder addItem;
+        private Button addItem;
 
         protected abstract void AddItemButtonClickEvent(object sender, EventArgs e);
 
 
         public void InitializeComponents()
         {
-            nameColumn = DataGridViewColumnFactory.Produce("nameColumn", "Tétel", true, 220);
-            quantityColumn = DataGridViewColumnFactory.Produce("quantityColumn", "Darabszám", true, 70);
-            priceColumn = DataGridViewColumnFactory.Produce("priceColumn", "Ár", true, 100);
-            invoiceColumn = DataGridViewColumnFactory.Produce("invoiceColumn", "Számla", true, 200);
+            nameColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("nameColumn", "Tétel", true, 220);
+            quantityColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("quantityColumn", "Darabszám", true, 70);
+            priceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("priceColumn", "Ár", true, 100);
+            invoiceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("invoiceColumn", "Számla", true, 200);
 
-            dataGridView = new DataGridViewBuilder()
+            dataGridView = new DataGridView()
                 .WithAllowUserToResizeColumnsValue(false)
                 .WithAllowUserToResizeRowsValue(false)
                 .WithRowHeadersVisibleValue(false)
@@ -37,14 +37,14 @@ namespace BartenderUI.List
                 .WithSize(590, 535)
                 .AddColumns(nameColumn, quantityColumn, priceColumn, invoiceColumn);
 
-            addItem = new ButtonBuilder()
+            addItem = new Button()
                 .WithName("addItem")
                 .WithText("Tétel hozzáadása")
                 .WithSize(590, 45)
                 .WithLocation(10, 555)
                 .AddClickEvent(AddItemButtonClickEvent);
 
-            GetInstance()
+            this
                 .WithClientSize(610, 610)
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
                 .WithName("List")

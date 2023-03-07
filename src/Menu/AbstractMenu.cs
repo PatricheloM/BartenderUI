@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Menu
 {
-    abstract class AbstractMenu : FormBuilder
+    abstract class AbstractMenu : Form
     {
-        protected DataGridViewBuilder dataGridView;
+        protected DataGridView dataGridView;
 
-        private DataGridViewTextBoxColumnBuilder item;
-        private DataGridViewTextBoxColumnBuilder price;
+        private DataGridViewTextBoxColumn item;
+        private DataGridViewTextBoxColumn price;
 
-        private ButtonBuilder addItem;
-        private ButtonBuilder addItemFromFile;
-        private ButtonBuilder removeItem;
+        private Button addItem;
+        private Button addItemFromFile;
+        private Button removeItem;
 
         protected abstract void AddItemButtonClickEvent(object sender, EventArgs e);
         protected abstract void AddItemFromFileButtonClickEvent(object sender, EventArgs e);
@@ -22,10 +22,10 @@ namespace BartenderUI.Menu
 
         protected void InitializeComponents()
         {
-            item = DataGridViewColumnFactory.Produce("item", "Termék név", true, 420);
-            price = DataGridViewColumnFactory.Produce("price", "Ár (Ft)", true, 160);
+            item = DataGridViewColumnFactory.TextBoxColumn.Produce("item", "Termék név", true, 420);
+            price = DataGridViewColumnFactory.TextBoxColumn.Produce("price", "Ár (Ft)", true, 160);
 
-            dataGridView = new DataGridViewBuilder()
+            dataGridView = new DataGridView()
                 .WithAllowUserToAddRowsValue(false)
                 .WithAllowUserToResizeColumnsValue(false)
                 .WithAllowUserToResizeRowsValue(false)
@@ -38,28 +38,28 @@ namespace BartenderUI.Menu
                 .WithScrollBars(ScrollBars.Vertical)
                 .AddColumns(item, price);
 
-            addItem = new ButtonBuilder()
+            addItem = new Button()
                 .WithName("addItem")
                 .WithText("Tétel hozzáadása")
                 .WithSize(580, 45)
                 .WithLocation(10, 685)
                 .AddClickEvent(AddItemButtonClickEvent);
 
-            addItemFromFile = new ButtonBuilder()
+            addItemFromFile = new Button()
                 .WithName("addItemFromFile")
                 .WithText("Tétel hozzáadása (fájlból)")
                 .WithSize(580, 45)
                 .WithLocation(10, 735)
                 .AddClickEvent(AddItemFromFileButtonClickEvent);
 
-            removeItem = new ButtonBuilder()
+            removeItem = new Button()
                 .WithName("removeItem")
                 .WithText("Tétel eltávolítása")
                 .WithSize(580, 45)
                 .WithLocation(10, 785)
                 .AddClickEvent(RemoveItemButtonClickEvent);
 
-            GetInstance()
+            this
                 .WithClientSize(600, 835)
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
                 .WithName("Menu")

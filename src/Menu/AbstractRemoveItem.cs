@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Redis;
 using StackExchange.Redis;
 
 namespace BartenderUI.Menu
 {
-    abstract class AbstractRemoveItem : FormBuilder
+    abstract class AbstractRemoveItem : Form
     {
-        private ButtonBuilder removeButton;
-        private ButtonBuilder undoButton;
+        private Button removeButton;
+        private Button undoButton;
 
-        private LabelBuilder infoLabel;
+        private Label infoLabel;
 
-        protected ComboBoxBuilder nameBox;
+        protected ComboBox nameBox;
 
         protected abstract void RemoveButtonClickEvent(object sender, EventArgs e);
         protected abstract void UndoButtonClickEvent(object sender, EventArgs e);
@@ -30,21 +30,21 @@ namespace BartenderUI.Menu
                 names.Add(item.Name);
             }
 
-            removeButton = new ButtonBuilder()
+            removeButton = new Button()
                 .WithLocation(12, 58)
                 .WithSize(118, 23)
                 .WithName("addButton")
                 .WithText("Oké")
                 .AddClickEvent(RemoveButtonClickEvent);
 
-            undoButton = new ButtonBuilder()
+            undoButton = new Button()
                 .WithLocation(136, 58)
                 .WithSize(75, 23)
                 .WithName("undoButton")
                 .WithText("Mégsem")
                 .AddClickEvent(UndoButtonClickEvent);
 
-            nameBox = new ComboBoxBuilder()
+            nameBox = new ComboBox()
                 .WithLocation(12, 25)
                 .WithSize(198, 20)
                 .WithName("nameBox")
@@ -52,13 +52,13 @@ namespace BartenderUI.Menu
                 .WithAutoCompleteSource(names.ToArray())
                 .AddAll(names.ToArray());
 
-            infoLabel = new LabelBuilder()
+            infoLabel = new Label()
                 .WithLocation(12, 5)
                 .WithSize(64, 13)
                 .WithName("infoLabel")
                 .WithText("Kezdje el gépelni!");
 
-            GetInstance()
+            this
                 .WithClientSize(223, 88)
                 .WithName("RemoveItem")
                 .WithText("Tétel eltávolítás")

@@ -1,13 +1,14 @@
 ﻿using System;
-using BartenderUI.Util.Builders;
+using System.Windows.Forms;
+using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.Util.Factories
 {
     class TimerFactory
     {
-        public static TimerBuilder Produce(int interval, EventHandler e)
+        public static Timer Produce(int interval, EventHandler e)
         {
-            return new TimerBuilder()
+            return new Timer()
                 .WithInterval(interval)
                 .AddTickEvent(e)
                 .WithEnabledValue(true);

@@ -6,7 +6,7 @@ using BartenderUI.Util;
 
 namespace BartenderUI
 {
-    class MainClass
+    class Program
     {
         [STAThread]
         static void Main()

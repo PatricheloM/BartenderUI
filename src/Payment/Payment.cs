@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using BartenderUI.Util;
 using BartenderUI.Util.Factories;
 using BartenderUI.Util.Events;
+using BartenderUI.Util.Extensions;
 using System.Linq;
 
 namespace BartenderUI.Payment

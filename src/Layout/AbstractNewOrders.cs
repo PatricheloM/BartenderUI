@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+﻿using System.Windows.Forms;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Layout
 {
-    class AbstractNewOrders : FormBuilder
+    class AbstractNewOrders : Form
     {
-        protected DataGridViewBuilder dataGridView;
-        private DataGridViewTextBoxColumnBuilder itemColumn;
-        private DataGridViewTextBoxColumnBuilder quantityColumn;
-        private DataGridViewTextBoxColumnBuilder tableColumn;
-        private DataGridViewTextBoxColumnBuilder invoiceColumn;
+        protected DataGridView dataGridView;
+        private DataGridViewTextBoxColumn itemColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewTextBoxColumn tableColumn;
+        private DataGridViewTextBoxColumn invoiceColumn;
+        private DataGridViewButtonColumn isDeliveredColumn;
 
         public void InitializeComponents()
         {
-            itemColumn = DataGridViewColumnFactory.Produce("itemColumn", "Tétel", true, 180);
-            quantityColumn = DataGridViewColumnFactory.Produce("quantityColumn", "Darabszám", true, 70);
-            tableColumn = DataGridViewColumnFactory.Produce("tableColumn", "Asztal", true, 100);
-            invoiceColumn = DataGridViewColumnFactory.Produce("invoiceColumn", "Számla", true, 200);
+            itemColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("itemColumn", "Tétel", true, 180);
+            quantityColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("quantityColumn", "Darab", true, 50);
+            tableColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("tableColumn", "Asztal", true, 50);
+            invoiceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("invoiceColumn", "Számla", true, 120);
+            isDeliveredColumn = DataGridViewColumnFactory.ButtonColumn.Produce("isDeliveredColumn", "Zárás", 50);
 
-            dataGridView = new DataGridViewBuilder()
+            dataGridView = new DataGridView()
                 .WithAllowUserToResizeColumnsValue(false)
                 .WithAllowUserToResizeRowsValue(false)
                 .WithRowHeadersVisibleValue(false)
@@ -31,9 +31,9 @@ namespace BartenderUI.Layout
                 .WithName("dataGridView")
                 .WithScrollBars(ScrollBars.Vertical)
                 .WithSize(450, 450)
-                .AddColumns(itemColumn, quantityColumn, tableColumn, invoiceColumn);
+                .AddColumns(itemColumn, quantityColumn, tableColumn, invoiceColumn, isDeliveredColumn);
 
-            GetInstance()
+            this
                 .WithClientSize(470, 470)
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
                 .WithName("Új rendelések")

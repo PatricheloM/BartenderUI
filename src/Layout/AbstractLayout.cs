@@ -2,27 +2,26 @@
 using System.Windows.Forms;
 using System.Drawing;
 using BartenderUI.Util;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Structs;
-using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Layout
 {
-    abstract class AbstractLayout : FormBuilder
+    abstract class AbstractLayout : Form
     {
-        private ButtonBuilder pluszBelso;
-        private ButtonBuilder pluszKulso;
+        private Button pluszBelso;
+        private Button pluszKulso;
 
-        private ButtonBuilder exitButton;
-        private ButtonBuilder minimizeButton;
-        private ButtonBuilder menuButton;
-        private ButtonBuilder kifizetesButton;
-        private ButtonBuilder resetButton;
+        private Button exitButton;
+        private Button minimizeButton;
+        private Button menuButton;
+        private Button kifizetesButton;
+        private Button resetButton;
 
-        protected GroupBoxBuilder groupBoxBelso;
-        protected GroupBoxBuilder groupBoxKulso;
+        protected GroupBox groupBoxBelso;
+        protected GroupBox groupBoxKulso;
 
-        protected LabelBuilder newOrderLabel;
+        protected Label newOrderLabel;
 
         protected abstract void PluszBelsoButtonClickEvent(object sender, EventArgs e);
         protected abstract void PluszKulsoButtonClickEvent(object sender, EventArgs e);
@@ -35,7 +34,7 @@ namespace BartenderUI.Layout
 
         protected void InitializeComponents() 
         {
-            pluszBelso = new ButtonBuilder()
+            pluszBelso = new Button()
                 .WithFont("Microsoft Sans Serif", 32F)
                 .WithLocation(5, 60)
                 .WithName("pluszB")
@@ -43,7 +42,7 @@ namespace BartenderUI.Layout
                 .WithSize(50, 50)
                 .AddClickEvent(PluszBelsoButtonClickEvent);
 
-            pluszKulso = new ButtonBuilder()
+            pluszKulso = new Button()
                 .WithFont("Microsoft Sans Serif", 32F)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() / 3 * 2 - 5, 60)
                 .WithName("pluszK")
@@ -51,7 +50,7 @@ namespace BartenderUI.Layout
                 .WithSize(50, 50)
                 .AddClickEvent(PluszKulsoButtonClickEvent);
 
-            exitButton = new ButtonBuilder()
+            exitButton = new Button()
                 .WithFont("Microsoft Sans Serif", 32F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 55, 5)
                 .WithName("exitButton")
@@ -59,7 +58,7 @@ namespace BartenderUI.Layout
                 .WithText("X")
                 .AddClickEvent(ExitButtonClickEvent);
 
-            minimizeButton = new ButtonBuilder()
+            minimizeButton = new Button()
                 .WithFont("Microsoft Sans Serif", 28F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 110, 5)
                 .WithName("minimizeButton")
@@ -67,7 +66,7 @@ namespace BartenderUI.Layout
                 .WithText("_")
                 .AddClickEvent(MinimizeButtonClickEvent);
 
-            menuButton = new ButtonBuilder()
+            menuButton = new Button()
                 .WithFont("Microsoft Sans Serif", 20F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 225, 5)
                 .WithName("menuButton")
@@ -75,7 +74,7 @@ namespace BartenderUI.Layout
                 .WithText("Menü")
                 .AddClickEvent(MenuButtonClickEvent);
 
-            kifizetesButton = new ButtonBuilder()
+            kifizetesButton = new Button()
                 .WithFont("Microsoft Sans Serif", 18F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 355, 5)
                 .WithName("kifizetesButton")
@@ -83,7 +82,7 @@ namespace BartenderUI.Layout
                 .WithText("Kifizetés")
                 .AddClickEvent(KifizetesButtonClickEvent);
 
-            resetButton = new ButtonBuilder()
+            resetButton = new Button()
                 .WithFont("Microsoft Sans Serif", 14F, FontStyle.Bold)
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() - 510, 5)
                 .WithName("resetButton")
@@ -91,26 +90,28 @@ namespace BartenderUI.Layout
                 .WithText("Új elrendezés")
                 .AddClickEvent(ResetButtonClickEvent);
 
-            groupBoxBelso = new GroupBoxBuilder()
+            groupBoxBelso = new GroupBox()
                 .WithName("groupBoxBelso")
                 .WithLocation(10, 60)
                 .WithSize(ScreenBoundsHelper.ScreenWidth() / 3 * 2 - 20, ScreenBoundsHelper.ScreenHeight() - 80);
 
-            groupBoxKulso = new GroupBoxBuilder()
+            groupBoxKulso = new GroupBox()
                 .WithName("groupBoxKulso")
                 .WithLocation(ScreenBoundsHelper.ScreenWidth() / 3 * 2, 60)
                 .WithSize(ScreenBoundsHelper.ScreenWidth() / 3 - 10, ScreenBoundsHelper.ScreenHeight() - 80);
 
-            newOrderLabel = new LabelBuilder()
+            newOrderLabel = new Label()
                 .WithName("newOrderLabel")
                 .WithLocation((ScreenBoundsHelper.ScreenWidth() - 500) / 2, 15)
                 .WithText("Új rendelés!")
                 .WithFont("Microsoft Sans Serif", 24F, FontStyle.Bold)
                 .WithFlashing(500, Color.Red, Color.Black)
+                .WithAutoSizeValue(true)
+                .WithBackColor(Color.Transparent)
                 .WithHiddenValue(true)
                 .AddClickEvent(NewOrderLabelClickEvent);
 
-            GetInstance()
+            this
                 .WithClientSize(ScreenBoundsHelper.ScreenWidth(), ScreenBoundsHelper.ScreenHeight())
                 .WithFormBorderStyle(FormBorderStyle.None)
                 .WithName("Layout")

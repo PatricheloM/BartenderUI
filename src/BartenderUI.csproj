@@ -85,7 +85,7 @@
     <Compile Include="List\NewInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainClass.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Menu\AbstractAddItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,44 +112,19 @@
     </Compile>
     <Compile Include="Redis\RedisConnection.cs" />
     <Compile Include="Redis\RedisRepository.cs" />
-    <Compile Include="Util\Builders\ButtonBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\ContextMenuBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\DataGridViewBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\DataGridViewTextBoxColumnBuilder.cs" />
-    <Compile Include="Util\Builders\ComboBoxBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\FormBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\GroupBoxBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\IBuilder.cs" />
-    <Compile Include="Util\Builders\LabelBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\NumericUpDownBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\PanelBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\PictureBoxBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\TextBoxBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Util\Builders\TimerBuilder.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Util\Extensions\ButtonExtensions.cs" />
+    <Compile Include="Util\Extensions\ContextMenuExtensions.cs" />
+    <Compile Include="Util\Extensions\DataGridViewExtensions.cs" />
+    <Compile Include="Util\Extensions\DataGridViewButtonColumnExtensions.cs" />
+    <Compile Include="Util\Extensions\DataGridViewTextBoxColumnExtensions.cs" />
+    <Compile Include="Util\Extensions\ComboBoxExtensions.cs" />
+    <Compile Include="Util\Extensions\FormExtensions.cs" />
+    <Compile Include="Util\Extensions\GroupBoxExtensions.cs" />
+    <Compile Include="Util\Extensions\LabelExtensions.cs" />
+    <Compile Include="Util\Extensions\NumericUpDownExtensions.cs" />
+    <Compile Include="Util\Extensions\PictureBoxExtensions.cs" />
+    <Compile Include="Util\Extensions\TextBoxExtensions.cs" />
+    <Compile Include="Util\Extensions\TimerExtensions.cs" />
     <Compile Include="Util\EventListeners.cs" />
     <Compile Include="Util\Events\RefreshEvent.cs" />
     <Compile Include="Util\ExcelFileReader.cs" />

@@ -1,22 +1,21 @@
 ﻿using System.Windows.Forms;
 using BartenderUI.Redis;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using System.Text.RegularExpressions;
 using BartenderUI.Util.HelperTypes;
 using System;
-using StackExchange.Redis;
 
 namespace BartenderUI.Util
 {
     class EventListeners
     {
-        public static void Start(FormBuilder layout, GroupBoxBuilder belso, GroupBoxBuilder kulso, LabelBuilder newOrderIndicator)
+        public static void Start(Form layout, GroupBox belso, GroupBox kulso, Label newOrderIndicator)
         {
             StartRefreshListener(layout, belso, kulso);
             StartNewOrderListener(layout, newOrderIndicator);
         }
 
-        protected static void StartNewOrderListener(FormBuilder layout, LabelBuilder newOrderIndicator)
+        protected static void StartNewOrderListener(Form layout, Label newOrderIndicator)
         {
             var channel = RedisConnection.GetMultiplexer().GetSubscriber().Subscribe("new_order");
             channel.OnMessage(message =>
@@ -34,7 +33,7 @@ namespace BartenderUI.Util
             });
         }
 
-        protected static void StartRefreshListener(FormBuilder layout, GroupBoxBuilder belso, GroupBoxBuilder kulso)
+        protected static void StartRefreshListener(Form layout, GroupBox belso, GroupBox kulso)
         {
             var channel = RedisConnection.GetMultiplexer().GetSubscriber().Subscribe("refresh");
             channel.OnMessage(message =>

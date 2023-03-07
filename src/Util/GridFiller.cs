@@ -1,14 +1,15 @@
 ﻿using System;
 using StackExchange.Redis;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Redis;
 using BartenderUI.Util.HelperTypes;
+using System.Windows.Forms;
 
 namespace BartenderUI.Util
 {
     class GridFiller
     {
-        public static void FillGrid(DataGridViewBuilder grid, NewOrder[] orders)
+        public static void FillGrid(DataGridView grid, NewOrder[] orders)
         {
             for (int i = 0; grid.Rows.Count > i;)
             {
@@ -17,11 +18,15 @@ namespace BartenderUI.Util
 
             foreach (NewOrder order in orders)
             {
-                grid.Rows.Add(order.Item, order.Quantity, order.Table, order.Invoice);
+                grid.Rows.Add(order.Item, order.Quantity, order.Table, order.Invoice,
+                    new Button()
+                    .WithName("isDelivered")
+                    .WithText("OK"));
+                    //.AddClickEvent()); TODO
             }
         }
 
-        public static void FillGrid(DataGridViewBuilder grid, HashEntry[] entries)
+        public static void FillGrid(DataGridView grid, HashEntry[] entries)
         {
             for (int i = 0; grid.Rows.Count > i;)
             {
@@ -34,7 +39,7 @@ namespace BartenderUI.Util
             }
         }
 
-        public static void FillGrid(DataGridViewBuilder grid, int id)
+        public static void FillGrid(DataGridView grid, int id)
         {
             for (int i = 0; grid.Rows.Count > i;)
             {
@@ -54,7 +59,7 @@ namespace BartenderUI.Util
             }
         }
 
-        public static void FillGrid(DataGridViewBuilder grid, string invoice)
+        public static void FillGrid(DataGridView grid, string invoice)
         {
             for (int i = 0; grid.Rows.Count > i;)
             {

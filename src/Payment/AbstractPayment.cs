@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Payment
 {
-    abstract class AbstractPayment : FormBuilder
+    abstract class AbstractPayment : Form
     {
-        private LabelBuilder infoLabel;
+        private Label infoLabel;
 
-        protected ComboBoxBuilder invoices;
+        protected ComboBox invoices;
 
-        protected ButtonBuilder payButton;
+        protected Button payButton;
 
-        protected DataGridViewBuilder dataGridView;
-        private DataGridViewTextBoxColumnBuilder itemColumn;
-        private DataGridViewTextBoxColumnBuilder quantityColumn;
-        private DataGridViewTextBoxColumnBuilder priceColumn;
+        protected DataGridView dataGridView;
+        private DataGridViewTextBoxColumn itemColumn;
+        private DataGridViewTextBoxColumn quantityColumn;
+        private DataGridViewTextBoxColumn priceColumn;
 
         protected abstract void PayButtonClickEvent(object sender, EventArgs e);
         protected abstract void InvoicesSelectedIndexChangedEvent(object sender, EventArgs e);
 
         protected void InitializeComponents()
         {
-            itemColumn = DataGridViewColumnFactory.Produce("itemColumn", "Tétel", true, 230);
-            quantityColumn = DataGridViewColumnFactory.Produce("quantityColumn", "Darabszám", true, 71);
-            priceColumn = DataGridViewColumnFactory.Produce("priceColumn", "Ár", true, 135);
+            itemColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("itemColumn", "Tétel", true, 230);
+            quantityColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("quantityColumn", "Darabszám", true, 71);
+            priceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("priceColumn", "Ár", true, 135);
 
-            dataGridView = new DataGridViewBuilder()
+            dataGridView = new DataGridView()
                 .WithAllowUserToResizeColumnsValue(false)
                 .WithAllowUserToResizeRowsValue(false)
                 .WithRowHeadersVisibleValue(false)
@@ -40,7 +40,7 @@ namespace BartenderUI.Payment
                 .WithSize(441, 366)
                 .AddColumns(itemColumn, quantityColumn, priceColumn);
 
-            infoLabel = new LabelBuilder()
+            infoLabel = new Label()
                 .WithAutoSizeValue(true)
                 .WithLocation(12, 16)
                 .WithFont("Microsoft Sans Serif", 9F, FontStyle.Bold)
@@ -48,7 +48,7 @@ namespace BartenderUI.Payment
                 .WithSize(63, 15)
                 .WithText("Számla: ");
 
-            payButton = new ButtonBuilder()
+            payButton = new Button()
                 .WithFont("Microsoft Sans Serif", 12F, FontStyle.Bold)
                 .WithLocation(15, 432)
                 .WithName("payButton")
@@ -56,14 +56,14 @@ namespace BartenderUI.Payment
                 .WithText("Válasszon számlát!")
                 .AddClickEvent(PayButtonClickEvent);
 
-            invoices = new ComboBoxBuilder()
+            invoices = new ComboBox()
                 .WithDropDownStyle(ComboBoxStyle.DropDownList)
                 .WithName("invoices")
                 .WithSize(387, 21)
                 .WithLocation(81, 13)
                 .AddSelectedIndexChangedEvent(InvoicesSelectedIndexChangedEvent);
 
-            GetInstance()
+            this
                 .WithClientSize(480, 480)
                 .WithFormBorderStyle(FormBorderStyle.FixedToolWindow)
                 .WithName("Payment")

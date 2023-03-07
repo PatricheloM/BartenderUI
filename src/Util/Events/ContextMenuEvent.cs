@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using BartenderUI.Util.Builders;
+using BartenderUI.Util.Extensions;
 using BartenderUI.Util.HelperTypes;
 
 namespace BartenderUI.Util.Events
@@ -12,10 +12,10 @@ namespace BartenderUI.Util.Events
 
             if (e.Button == MouseButtons.Right)
             {
-                ContextMenuBuilder contextMenuBuilder = new ContextMenuBuilder()
+                ContextMenu contextMenu = new ContextMenu()
                     .AddAll(new ContextMenuEntry("Asztal törlése", HideEvents.CallForTableContextMenuEvent));
 
-                control.ContextMenu = contextMenuBuilder;
+                control.ContextMenu = contextMenu;
             }
         }
     }
