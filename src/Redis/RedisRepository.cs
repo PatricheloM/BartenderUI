@@ -102,5 +102,10 @@ namespace BartenderUI.Redis
         {
             return server.Keys(pattern: pattern);
         }
+
+        public static int LLen(string key)
+        {
+            return (int) db.ListLength(key);
+        }
     }
 }

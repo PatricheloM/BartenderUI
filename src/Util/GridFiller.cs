@@ -22,7 +22,6 @@ namespace BartenderUI.Util
                     new Button()
                     .WithName("isDelivered")
                     .WithText("OK"));
-                    //.AddClickEvent()); TODO
             }
         }
 

@@ -130,7 +130,6 @@
     <Compile Include="Util\ExcelFileReader.cs" />
     <Compile Include="Util\Factories\TimerFactory.cs" />
     <Compile Include="Util\HelperTypes\ContextMenuEntry.cs" />
-    <Compile Include="Util\Events\ClearTableEvent.cs" />
     <Compile Include="Util\Events\ContextMenuEvent.cs" />
     <Compile Include="Util\Events\DragAndDropEvents.cs" />
     <Compile Include="Util\Events\HideEvents.cs" />

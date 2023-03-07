@@ -1,10 +1,11 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
 
 namespace BartenderUI.Layout
 {
-    class AbstractNewOrders : Form
+    abstract class AbstractNewOrders : Form
     {
         protected DataGridView dataGridView;
         private DataGridViewTextBoxColumn itemColumn;
@@ -13,13 +14,15 @@ namespace BartenderUI.Layout
         private DataGridViewTextBoxColumn invoiceColumn;
         private DataGridViewButtonColumn isDeliveredColumn;
 
+        protected abstract void GridViewButtonClickEvent(object sender, DataGridViewCellEventArgs e);
+
         public void InitializeComponents()
         {
+            isDeliveredColumn = DataGridViewColumnFactory.ButtonColumn.Produce("isDeliveredColumn", "Zárás", 50);
             itemColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("itemColumn", "Tétel", true, 180);
             quantityColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("quantityColumn", "Darab", true, 50);
             tableColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("tableColumn", "Asztal", true, 50);
             invoiceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("invoiceColumn", "Számla", true, 120);
-            isDeliveredColumn = DataGridViewColumnFactory.ButtonColumn.Produce("isDeliveredColumn", "Zárás", 50);
 
             dataGridView = new DataGridView()
                 .WithAllowUserToResizeColumnsValue(false)
@@ -31,7 +34,8 @@ namespace BartenderUI.Layout
                 .WithName("dataGridView")
                 .WithScrollBars(ScrollBars.Vertical)
                 .WithSize(450, 450)
-                .AddColumns(itemColumn, quantityColumn, tableColumn, invoiceColumn, isDeliveredColumn);
+                .AddCellContentClickEvent(GridViewButtonClickEvent)
+                .AddColumns(isDeliveredColumn, itemColumn, quantityColumn, tableColumn, invoiceColumn);
 
             this
                 .WithClientSize(470, 470)

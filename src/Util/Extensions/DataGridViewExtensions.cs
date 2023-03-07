@@ -96,6 +96,12 @@ namespace BartenderUI.Util.Extensions
             return o;
         }
 
+        public static DataGridView AddCellContentClickEvent(this DataGridView o, DataGridViewCellEventHandler value)
+        {
+            o.CellContentClick += value;
+            return o;
+        }
+
         public static DataGridView AddEditingControlShowingEvent(this DataGridView o, DataGridViewEditingControlShowingEventHandler value)
         {
             o.EditingControlShowing += value;

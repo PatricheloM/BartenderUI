@@ -19,6 +19,8 @@ namespace BartenderUI.Layout
             EventListeners.Start(this, groupBoxBelso, groupBoxKulso, newOrderLabel);
 
             RefreshEvent.Invoke();
+
+            if (RedisRepository.LLen("new_orders") != 0) newOrderLabel.WithHiddenValue(false); 
         }
 
         protected override void PluszBelsoButtonClickEvent(object sender, EventArgs e)
@@ -64,16 +66,14 @@ namespace BartenderUI.Layout
 
         protected override void NewOrderLabelClickEvent(object sender, EventArgs e)
         {
-            HideEvents.CallGenericEvent(sender, e);
-
             List<NewOrder> convertedOrders = new List<NewOrder>();
             foreach (string order in RedisRepository.LRange("new_orders"))
             {
                 convertedOrders.Add(PublishedMessageConverter.Convert(order));
             }
-            RedisRepository.Del("new_orders");
             NewOrders newOrders = new NewOrders(convertedOrders);
             newOrders.ShowDialog();
+            if (RedisRepository.LLen("new_orders") == 0) HideEvents.CallGenericEvent(sender, e);
         }
     }
 }
