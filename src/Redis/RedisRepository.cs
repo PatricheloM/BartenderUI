@@ -112,5 +112,10 @@ namespace BartenderUI.Redis
         {
             db.ListRemove(key, value, 1);
         }
+
+        public static bool HExists(string key, string value)
+        {
+            return db.HashExists(key, value);
+        }
     }
 }
