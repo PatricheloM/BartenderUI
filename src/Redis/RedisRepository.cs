@@ -107,5 +107,10 @@ namespace BartenderUI.Redis
         {
             return (int) db.ListLength(key);
         }
+
+        public static void LRem(string key, string value)
+        {
+            db.ListRemove(key, value, 1);
+        }
     }
 }

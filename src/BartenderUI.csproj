@@ -140,6 +140,7 @@
     <Compile Include="Util\HelperTypes\FileDetails.cs" />
     <Compile Include="Util\FileWriter.cs" />
     <Compile Include="Util\HelperTypes\NewOrder.cs" />
+    <Compile Include="Util\NewOrderHelper.cs" />
     <Compile Include="Util\OrderHelper.cs" />
     <Compile Include="Util\PublishedMessageConverter.cs" />
     <Compile Include="Util\Structs\Base64Struct.cs" />

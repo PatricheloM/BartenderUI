@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using BartenderUI.Util;
 using BartenderUI.Util.Events;
 using BartenderUI.Util.Factories;
 using BartenderUI.Redis;
-using BartenderUI.Util.HelperTypes;
 using BartenderUI.Util.Extensions;
 
 namespace BartenderUI.Layout
@@ -66,12 +64,7 @@ namespace BartenderUI.Layout
 
         protected override void NewOrderLabelClickEvent(object sender, EventArgs e)
         {
-            List<NewOrder> convertedOrders = new List<NewOrder>();
-            foreach (string order in RedisRepository.LRange("new_orders"))
-            {
-                convertedOrders.Add(PublishedMessageConverter.Convert(order));
-            }
-            NewOrders newOrders = new NewOrders(convertedOrders);
+            NewOrders newOrders = new NewOrders();
             newOrders.ShowDialog();
             if (RedisRepository.LLen("new_orders") == 0) HideEvents.CallGenericEvent(sender, e);
         }

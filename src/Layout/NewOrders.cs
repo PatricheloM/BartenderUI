@@ -1,27 +1,32 @@
-﻿using BartenderUI.Util;
-using BartenderUI.Util.Factories;
+﻿using BartenderUI.Redis;
+using BartenderUI.Util;
 using BartenderUI.Util.HelperTypes;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BartenderUI.Layout
 {
     class NewOrders : AbstractNewOrders
     {
-        public NewOrders(List<NewOrder> orders)
+        public NewOrders()
         {
             InitializeComponents();
-            GridFiller.FillGrid(dataGridView, orders.ToArray());
+            GridFiller.FillGrid(dataGridView, NewOrderHelper.GetNewOrders().ToArray());
         }
 
         protected override void GridViewButtonClickEvent(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView senderGrid = (DataGridView) sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            if (dataGridView.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                throw new NotImplementedException();
+                RedisRepository.LRem("new_orders", PublishedMessageConverter.ObjectToString(
+                    new NewOrder(
+                        dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString(),
+                        dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                        dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                        dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString())));
+                if (RedisRepository.LLen("new_orders") != 0) GridFiller.FillGrid(dataGridView, NewOrderHelper.GetNewOrders().ToArray());
+                else Close();
             }
         }
     }

@@ -18,11 +18,11 @@ namespace BartenderUI.Layout
 
         public void InitializeComponents()
         {
-            isDeliveredColumn = DataGridViewColumnFactory.ButtonColumn.Produce("isDeliveredColumn", "Zárás", 50);
             itemColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("itemColumn", "Tétel", true, 180);
             quantityColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("quantityColumn", "Darab", true, 50);
             tableColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("tableColumn", "Asztal", true, 50);
             invoiceColumn = DataGridViewColumnFactory.TextBoxColumn.Produce("invoiceColumn", "Számla", true, 120);
+            isDeliveredColumn = DataGridViewColumnFactory.ButtonColumn.Produce("isDeliveredColumn", "Zárás", 50);
 
             dataGridView = new DataGridView()
                 .WithAllowUserToResizeColumnsValue(false)
@@ -35,7 +35,7 @@ namespace BartenderUI.Layout
                 .WithScrollBars(ScrollBars.Vertical)
                 .WithSize(450, 450)
                 .AddCellContentClickEvent(GridViewButtonClickEvent)
-                .AddColumns(isDeliveredColumn, itemColumn, quantityColumn, tableColumn, invoiceColumn);
+                .AddColumns(itemColumn, quantityColumn, tableColumn, invoiceColumn, isDeliveredColumn);
 
             this
                 .WithClientSize(470, 470)

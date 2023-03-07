@@ -25,7 +25,7 @@ namespace BartenderUI.Util
                     if (Regex.IsMatch(message.Message, @"^.+\|\d+\|\d+\|.+$"))
                     {
                         RedisRepository.LPush("new_orders", message.Message);
-                        NewOrder newOrder = PublishedMessageConverter.Convert(message.Message);
+                        NewOrder newOrder = PublishedMessageConverter.StringToObject(message.Message);
                         OrderHelper.PushItemToRedis(Convert.ToInt32(newOrder.Table), newOrder.Invoice, newOrder.Item, Convert.ToInt32(newOrder.Quantity));
                         newOrderIndicator.WithHiddenValue(false);
                     }
