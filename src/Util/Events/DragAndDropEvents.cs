@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using BartenderUI.Util.Extensions;
 using BartenderUI.Redis;
 using StackExchange.Redis;
+using BartenderUI.Util.HelperTypes;
 
 namespace BartenderUI.Util.Events
 {
@@ -62,10 +62,10 @@ namespace BartenderUI.Util.Events
 
         public static void MouseUpEventForTable(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = sender as PictureBox;
-            RedisRepository.HMSet("asztal_" + pictureBox.GetId(),
-                new HashEntry("X", pictureBox.Location.X),
-                new HashEntry("Y", pictureBox.Location.Y));
+            Table table = sender as Table;
+            RedisRepository.HMSet("asztal_" + table.Id,
+                new HashEntry("X", table.Location.X),
+                new HashEntry("Y", table.Location.Y));
 
             MouseUpEventGeneric(sender, e);
         }

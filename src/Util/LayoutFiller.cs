@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using BartenderUI.Redis;
 using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
+using BartenderUI.Util.HelperTypes;
 
 namespace BartenderUI.Util
 {
@@ -12,7 +13,7 @@ namespace BartenderUI.Util
         {
             foreach (string tableId in RedisRepository.SMembers("asztalok"))
             {
-                PictureBox table = TableFactory.Produce(
+                Table table = TableFactory.Produce(
                     Convert.ToInt32(tableId),
                     Convert.ToInt32(RedisRepository.HGet("asztal_" + tableId, "X")),
                     Convert.ToInt32(RedisRepository.HGet("asztal_" + tableId, "Y")), 

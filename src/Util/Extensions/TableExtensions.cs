@@ -1,44 +1,20 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using BartenderUI.Util.HelperTypes;
 using BartenderUI.Util.Structs;
 
 namespace BartenderUI.Util.Extensions
 {
-    static class PictureBoxExtensions
+    static class TableExtensions
     {
-        private static int Id;
-        private static SzabadFoglaltEnum State;
-
-        public static int GetId(this PictureBox o)
-        {
-            return Id;
-        }
-
-        public static PictureBox SetId(this PictureBox o, int value)
-        {
-            Id = value;
-            return o;
-        }
-
-        public static SzabadFoglaltEnum GetState(this PictureBox o)
-        {
-            return State;
-        }
-
-        public static PictureBox SetState(this PictureBox o, SzabadFoglaltEnum value)
-        { 
-            State = value;
-            return o;
-        }
-
-        public static PictureBox WithName(this PictureBox o, string value)
+        public static Table WithName(this Table o, string value)
         {
             o.Name = value;
             return o;
         }
 
-        public static PictureBox AddAll(this PictureBox o, params Control[] values)
+        public static Table AddAll(this Table o, params Control[] values)
         {
             foreach (var control in values)
             {
@@ -47,7 +23,7 @@ namespace BartenderUI.Util.Extensions
             return o;
         }
 
-        private static PictureBox WithImage(this PictureBox o, string value)
+        private static Table WithImage(this Table o, string value)
         {
             try
             {
@@ -60,51 +36,51 @@ namespace BartenderUI.Util.Extensions
             return o;
         }
 
-        public static PictureBox WithSize(this PictureBox o, int value1, int value2)
+        public static Table WithSize(this Table o, int value1, int value2)
         {
             o.Size = new Size(value1, value2);
             return o;
         }
 
-        public static PictureBox WithLocation(this PictureBox o, int value1, int value2)
+        public static Table WithLocation(this Table o, int value1, int value2)
         {
             o.Location = new Point(value1, value2);
             return o;
         }
 
-        public static PictureBox AddDoubleClickEvent(this PictureBox o, EventHandler value)
+        public static Table AddDoubleClickEvent(this Table o, EventHandler value)
         {
             o.DoubleClick += value;
             return o;
         }
 
-        public static PictureBox AddMouseDownEvent(this PictureBox o, MouseEventHandler value)
+        public static Table AddMouseDownEvent(this Table o, MouseEventHandler value)
         {
             o.MouseDown += value;
             return o;
         }
 
-        public static PictureBox AddMouseMoveEvent(this PictureBox o, MouseEventHandler value)
+        public static Table AddMouseMoveEvent(this Table o, MouseEventHandler value)
         {
             o.MouseMove += value;
             return o;
         }
 
-        public static PictureBox AddMouseUpEvent(this PictureBox o, MouseEventHandler value)
+        public static Table AddMouseUpEvent(this Table o, MouseEventHandler value)
         {
             o.MouseUp += value;
             return o;
         }
 
-        public static PictureBox WithId(this PictureBox o, int value)
+        public static Table WithId(this Table o, int value)
         {
-            Id = value;
+            o.Id = value;
             return o;
         }
 
-        public static PictureBox WithState(this PictureBox o, SzabadFoglaltEnum value)
+        public static Table WithState(this Table o, SzabadFoglaltEnum value)
         {
-            State = value;
+            o.State = value;
 
             switch (value)
             {
@@ -117,13 +93,13 @@ namespace BartenderUI.Util.Extensions
             }
         }
 
-        public static PictureBox WithIdLabel(this PictureBox o)
+        public static Table WithIdLabel(this Table o)
         {
             o.Paint += new PaintEventHandler((sender, e) =>
             {
                 e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-                string text = Id.ToString();
+                string text = o.Id.ToString();
 
                 SizeF textSize = e.Graphics.MeasureString(text, new Font(FontFamily.GenericSerif, 60));
                 PointF locationToDraw = new PointF();

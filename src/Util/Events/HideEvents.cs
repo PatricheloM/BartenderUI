@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BartenderUI.Util.Extensions;
 using BartenderUI.Util.Factories;
+using BartenderUI.Util.HelperTypes;
 
 namespace BartenderUI.Util.Events
 {
@@ -10,14 +10,14 @@ namespace BartenderUI.Util.Events
         public static void CallForTableContextMenuEvent(object sender, EventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            PictureBox table = menuItem.GetContextMenu().SourceControl as PictureBox;
-            if (table.GetState() == SzabadFoglaltEnum.Foglalt)
+            Table table = menuItem.GetContextMenu().SourceControl as Table;
+            if (table.State == SzabadFoglaltEnum.Foglalt)
             {
                 MessageBoxFactory.Produce(MessageBoxFactory.GetNotEmptyTableText(), MessageBoxFactory.GetNotEmptyTableTitle(), MessageBoxButtons.OK);
             }
             else 
             {
-                InvoiceDeleteHelper.DeleteTable(table.GetId().ToString());
+                InvoiceDeleteHelper.DeleteTable(table.Id.ToString());
                 table.Hide();
             }
         }

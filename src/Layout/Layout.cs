@@ -24,11 +24,13 @@ namespace BartenderUI.Layout
         protected override void PluszBelsoButtonClickEvent(object sender, EventArgs e)
         {
             groupBoxBelso.AddAll(TableFactory.Produce(TablePlaceEnum.Belso));
+            RefreshEvent.Invoke();
         }
 
         protected override void PluszKulsoButtonClickEvent(object sender, EventArgs e)
         {
             groupBoxKulso.AddAll(TableFactory.Produce(TablePlaceEnum.Kulso));
+            RefreshEvent.Invoke();
         }
 
         protected override void ExitButtonClickEvent(object sender, EventArgs e)
