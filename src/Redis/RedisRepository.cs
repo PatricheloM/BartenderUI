@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
 
 namespace BartenderUI.Redis
@@ -116,6 +117,11 @@ namespace BartenderUI.Redis
         public static bool HExists(string key, string value)
         {
             return db.HashExists(key, value);
+        }
+
+        public static void Ping()
+        {
+            db.Ping();
         }
     }
 }
