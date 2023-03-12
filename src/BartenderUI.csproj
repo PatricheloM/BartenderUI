@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Redis\RedisConnection.cs" />
     <Compile Include="Redis\RedisRepository.cs" />
+    <Compile Include="Util\ConnectionTester.cs" />
     <Compile Include="Util\Extensions\ButtonExtensions.cs" />
     <Compile Include="Util\Extensions\ContextMenuExtensions.cs" />
     <Compile Include="Util\Extensions\DataGridViewExtensions.cs" />
