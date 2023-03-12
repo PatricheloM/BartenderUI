@@ -16,8 +16,6 @@ namespace BartenderUI.Layout
 
             EventListeners.Start(this, groupBoxBelso, groupBoxKulso, newOrderLabel);
 
-            RefreshEvent.Invoke();
-
             if (RedisRepository.LLen("new_orders") != 0) newOrderLabel.WithHiddenValue(false); 
         }
 

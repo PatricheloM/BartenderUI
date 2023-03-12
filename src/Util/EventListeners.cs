@@ -1,10 +1,12 @@
 ﻿using System.Windows.Forms;
 using BartenderUI.Redis;
 using BartenderUI.Util.Extensions;
-using System.Text.RegularExpressions;
+using BartenderUI.Util.Events;
 using BartenderUI.Util.HelperTypes;
+using System.Text.RegularExpressions;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace BartenderUI.Util
 {
@@ -12,11 +14,13 @@ namespace BartenderUI.Util
     {
         public static void Start(Form layout, GroupBox belso, GroupBox kulso, Label newOrderIndicator)
         {
-
-            while (layout.IsHandleCreated && belso.IsHandleCreated && kulso.IsHandleCreated && newOrderIndicator.IsHandleCreated)
-                Thread.Sleep(100);
-            StartRefreshListener(layout, belso, kulso);
-            StartNewOrderListener(layout, newOrderIndicator);
+            Task.Run(() =>
+            {
+                while (!layout.IsHandleCreated) Thread.Sleep(100);
+                StartRefreshListener(layout, belso, kulso);
+                StartNewOrderListener(layout, newOrderIndicator);
+                RefreshEvent.Invoke();
+            });
         }
 
         protected static void StartNewOrderListener(Form layout, Label newOrderIndicator)

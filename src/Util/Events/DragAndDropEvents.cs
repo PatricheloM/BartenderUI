@@ -2,6 +2,7 @@
 using BartenderUI.Redis;
 using StackExchange.Redis;
 using BartenderUI.Util.HelperTypes;
+using System;
 
 namespace BartenderUI.Util.Events
 {
@@ -63,10 +64,15 @@ namespace BartenderUI.Util.Events
         public static void MouseUpEventForTable(object sender, MouseEventArgs e)
         {
             Table table = sender as Table;
-            RedisRepository.HMSet("asztal_" + table.Id,
-                new HashEntry("X", table.Location.X),
-                new HashEntry("Y", table.Location.Y));
-
+            string tableKey = "asztal_" + table.Id;
+            if (Convert.ToInt32(RedisRepository.HGet(tableKey, "X")) != table.Location.X 
+                && Convert.ToInt32(RedisRepository.HGet(tableKey, "Y")) != table.Location.Y)
+            {
+                RedisRepository.HMSet(tableKey,
+                    new HashEntry("X", table.Location.X),
+                    new HashEntry("Y", table.Location.Y));
+                RefreshEvent.Invoke();
+            }
             MouseUpEventGeneric(sender, e);
         }
     }
